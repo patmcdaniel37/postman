@@ -1,5 +1,0 @@
-{
-  "environment": "postman/environments/API Testing.postman_environment.json",
-  "reporters": ["cli", "json"],
-  "reporter-json-export": "postman/collections/newman-report.json"
-}
