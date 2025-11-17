@@ -4,7 +4,7 @@
 		"name": "01 - RESTful API Fundamentals",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "48982578",
-		"_collection_link": "https://www.postman.com/patmcdaniel37-5264329/workspace/api-testing/collection/48982578-0079a434-baf3-4884-84a0-2f107f447ca3?action=share&source=collection_link&creator=48982578"
+		"_collection_link": "https://www.postman.com/patmcdaniel37-5264329/workspace/525a51e9-7535-4d44-b9b5-1a0a35d42ce5/collection/48982578-0079a434-baf3-4884-84a0-2f107f447ca3?action=share&source=collection_link&creator=48982578"
 	},
 	"item": [
 		{
@@ -312,11 +312,34 @@
 			"response": []
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "",
-			"type": "default"
+			"value": ""
 		},
 		{
 			"key": "firstUserId",
