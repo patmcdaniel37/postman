@@ -438,6 +438,236 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Update Entire Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//validate reponse code of 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//validate response time is less than 1000ms",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"//validate response is empty",
+							"pm.test(\"Response for delete should be empty\", function(){",
+							"    pm.expect(pm.response.json()).to.eql({});",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"Deleting post with id 1...\")"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/posts/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Partial Update Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(pm.variables.get(\"postBody\"));",
+							"//validate reponse code of 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//validate response time is less than 1000ms",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"//validate each post has userId, id, title, body",
+							"pm.test(\"Each post has userId, id, title, body\", function(){",
+							"        pm.expect(pm.response.json()).to.have.property(\"id\");",
+							"        pm.expect(pm.response.json()).to.have.property(\"title\");",
+							"        pm.expect(pm.response.json()).to.have.property(\"body\");",
+							"        pm.expect(pm.response.json()).to.have.property(\"userId\");",
+							"});",
+							"",
+							"//validate the title returned is what was set in the pre-test",
+							"pm.test(\"Validate title is correct'\", function () {",
+							"    pm.expect(pm.response.json().title).to.eql(pm.variables.get(\"postTitle\"));",
+							"});",
+							"",
+							"//validate the rest of the response didn't change",
+							"pm.test(\"Validate rest of response is correct'\", function () {",
+							"    pm.expect(pm.response.json().userId).to.eql(1);",
+							"    pm.expect(pm.response.json().id).to.eql(1);",
+							"    pm.expect(pm.response.json().body).to.eql(",
+							"        \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Generate random title and body using pm.variables.set",
+							"const randomTitle = pm.variables.replaceIn(\"{{$randomWord}} Post Title\");",
+							"const randomBody = pm.variables.replaceIn(\"This is a body with {{$randomWord}} content\");",
+							"",
+							"pm.variables.set(\"postTitle\", randomTitle);",
+							"pm.variables.set(\"postBody\", randomBody);",
+							"console.log(randomBody);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"{{postTitle}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/posts/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//validate reponse code of 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//validate response time is less than 1000ms",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"//validate each post has userId, id, title, body",
+							"pm.test(\"Each post has userId, id, title, body\", function(){",
+							"        pm.expect(pm.response.json()).to.have.property(\"id\");",
+							"        pm.expect(pm.response.json()).to.have.property(\"title\");",
+							"        pm.expect(pm.response.json()).to.have.property(\"body\");",
+							"        pm.expect(pm.response.json()).to.have.property(\"userId\");",
+							"});",
+							"",
+							"//validate the title returned is what was set in the pre-test",
+							"pm.test(\"Validate title is correct'\", function () {",
+							"    pm.expect(pm.response.json().title).to.eql(pm.variables.get(\"postTitle\"));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Generate random title and body using pm.variables.set",
+							"const randomTitle = pm.variables.replaceIn(\"{{$randomWord}} Post Title\");",
+							"const randomBody = pm.variables.replaceIn(\"This is a body with {{$randomWord}} content\");",
+							"",
+							"pm.variables.set(\"postTitle\", randomTitle);",
+							"pm.variables.set(\"postBody\", randomBody);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"title\": \"{{postTitle}}\",\n    \"body\": \"{{postBody}}\",\n    \"userId\": {{firstUserId}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/posts/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
