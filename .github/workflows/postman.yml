@@ -28,17 +28,17 @@ jobs:
           npx newman run "postman/collections/01 - RESTful API Fundamentals.postman_collection.json" \
             --environment "postman/environments/API Testing.postman_environment.json" \
             --reporters cli,json \
-            --reporter-json-export "postman/collections/newman-report.json"
+            --reporter-json-export "postman/collections/newman-report-01.json"
             
           npx newman run "postman/collections/02 - Authentication/Authorization.postman_collection.json" \
             --environment "postman/environments/API Testing.postman_environment.json" \
             --reporters cli,json \
-            --reporter-json-export "postman/collections/newman-report.json"
+            --reporter-json-export "postman/collections/newman-report-02.json"
 
           npx newman run "postman/collections/03 - Public APIs Testing.postman_collection" \
             --environment "postman/environments/API Testing.postman_environment.json" \
             --reporters cli,json \
-            --reporter-json-export "postman/collections/newman-report.json"
+            --reporter-json-export "postman/collections/newman-report-03.json"
 
       - name: Upload Newman Report
         uses: actions/upload-artifact@v4
