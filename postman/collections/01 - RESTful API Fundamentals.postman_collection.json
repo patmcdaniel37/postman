@@ -59,6 +59,13 @@
 						"packages": {},
 						"requests": {}
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -187,6 +194,13 @@
 						"type": "text/javascript",
 						"packages": {},
 						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -343,7 +357,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"title\": \"myTestTitle\",\n  \"body\": \"myTestBody\",\n  \"userId\": {{firstUserId}}\n}",
+					"raw": "{\n  \"title\": \"myTestTitle\",\n  \"body\": \"myTestBody\",\n  \"userId\": {{first_user_id}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -363,7 +377,7 @@
 			"response": []
 		},
 		{
-			"name": "Create New Post Copy",
+			"name": "Create New Post With Dynamic Data",
 			"event": [
 				{
 					"listen": "test",
@@ -440,7 +454,7 @@
 			"response": []
 		},
 		{
-			"name": "Update Entire Post",
+			"name": "Delete Post",
 			"event": [
 				{
 					"listen": "test",
@@ -704,19 +718,27 @@
 			"value": ""
 		},
 		{
-			"key": "firstPostBody",
+			"key": "first_post_body",
 			"value": ""
 		},
 		{
-			"key": "firstPostUserId",
+			"key": "first_post_user_id",
 			"value": ""
 		},
 		{
-			"key": "firstPostId",
+			"key": "first_post_id",
+			"value": ""
+		},
+		{
+			"key": "first_user_id",
 			"value": ""
 		},
 		{
 			"key": "firstUserId",
+			"value": ""
+		},
+		{
+			"key": "firstPostId",
 			"value": ""
 		}
 	]
