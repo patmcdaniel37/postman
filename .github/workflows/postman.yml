@@ -35,6 +35,11 @@ jobs:
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report.json"
 
+          npx newman run "postman/collections/03 - Public APIs Testing.postman_collection" \
+            --environment "postman/environments/API Testing.postman_environment.json" \
+            --reporters cli,json \
+            --reporter-json-export "postman/collections/newman-report.json"
+
       - name: Upload Newman Report
         uses: actions/upload-artifact@v4
         if: always()
