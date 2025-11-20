@@ -11,6 +11,8 @@ on:
 jobs:
   automated-api-tests:
     runs-on: ubuntu-latest
+    env:
+      ENV_FILE: Dev.postman_environment.json # change as needed (Stage/Prod)
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,7 +28,7 @@ jobs:
       - name: Run Postman Collection
         run: |
           npx newman run "postman/collections/01 - RESTful API Fundamentals.postman_collection.json" \
-            --environment "postman/environments/API Testing.postman_environment.json" \
+            --environment "postman/environments/${{ env.ENV_FILE }}" \
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report-01.json"
             
