@@ -46,27 +46,27 @@ jobs:
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report-03.json"
 
-          # npx newman run "postman/collections/04 - Data Driven Testing.postman_collection.json" \
-          #   --environment "postman/environments/${{ env.ENV_FILE }}" \
-          #   --iteration-data postman/collections/testData.csv \
-          #   --reporters cli,json \
-          #   --reporter-json-export "postman/collections/newman-report-04-csv.json"
+          npx newman run "postman/collections/04 - Data Driven Testing.postman_collection.json" \
+            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --iteration-data postman/collections/testData.csv \
+            --reporters cli,json \
+            --reporter-json-export "postman/collections/newman-report-04-csv.json"
 
-          # npx newman run "postman/collections/04 - Data Driven Testing.postman_collection.json" \
-          #   --environment "postman/environments/${{ env.ENV_FILE }}" \
-          #   --iteration-data postman/collections/testData.json \
-          #   --reporters cli,json \
-          #   --reporter-json-export "postman/collections/newman-report-04-json.json"
+          npx newman run "postman/collections/04 - Data Driven Testing.postman_collection.json" \
+            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --iteration-data postman/collections/testData.json \
+            --reporters cli,json \
+            --reporter-json-export "postman/collections/newman-report-04-json.json"
 
-          # npx newman run "postman/collections/05 - E2E Shopping Workflow.postman_collection.json" \
-          #   --environment "postman/environments/${{ env.ENV_FILE }}" \
-          #   --reporters cli,json \
-          #   --reporter-json-export "postman/collections/newman-report-05.json"
+          npx newman run "postman/collections/05 - E2E Shopping Workflow.postman_collection.json" \
+            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --reporters cli,json \
+            --reporter-json-export "postman/collections/newman-report-05.json"
 
-          # npx newman run "postman/collections/06 - Advanced Techniques.postman_collection.json" \
-          #   --environment "postman/environments/${{ env.ENV_FILE }}" \
-          #   --reporters cli,json \
-          #   --reporter-json-export "postman/collections/newman-report-06.json"
+          npx newman run "postman/collections/06 - Advanced Techniques.postman_collection.json" \
+            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --reporters cli,json \
+            --reporter-json-export "postman/collections/newman-report-06.json"
 
       - name: Upload Newman Report - 01
         uses: actions/upload-artifact@v4
@@ -89,30 +89,30 @@ jobs:
           name: newman-report-03
           path: postman/collections/newman-report-03.json
 
-      # - name: Upload Newman Report - 04-csv
-      #   uses: actions/upload-artifact@v4
-      #   if: always()
-      #   with:
-      #     name: newman-report-04-csv
-      #     path: postman/collections/newman-report-04-csv.json
+      - name: Upload Newman Report - 04-csv
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: newman-report-04-csv
+          path: postman/collections/newman-report-04-csv.json
 
-      # - name: Upload Newman Report - 04-json
-      #   uses: actions/upload-artifact@v4
-      #   if: always()
-      #   with:
-      #     name: newman-report-04-json
-      #     path: postman/collections/newman-report-04-json.json
+      - name: Upload Newman Report - 04-json
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: newman-report-04-json
+          path: postman/collections/newman-report-04-json.json
 
-      # - name: Upload Newman Report - 05
-      #   uses: actions/upload-artifact@v4
-      #   if: always()
-      #   with:
-      #     name: newman-report-05
-      #     path: postman/collections/newman-report-05.json
+      - name: Upload Newman Report - 05
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: newman-report-05
+          path: postman/collections/newman-report-05.json
 
-      # - name: Upload Newman Report - 06
-      #   uses: actions/upload-artifact@v4
-      #   if: always()
-      #   with:
-      #     name: newman-report-06
-      #     path: postman/collections/newman-report-06.json
+      - name: Upload Newman Report - 06
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: newman-report-06
+          path: postman/collections/newman-report-06.json

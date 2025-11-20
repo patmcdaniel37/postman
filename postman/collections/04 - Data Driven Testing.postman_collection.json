@@ -26,7 +26,6 @@
 							"    jsonData = null;",
 							"}",
 							"",
-							"",
 							"// Only run further tests if JSON was successfully parsed",
 							"if (jsonData) {",
 							"    const json = pm.response.json();",
