@@ -2,9 +2,10 @@
 	"info": {
 		"_postman_id": "0079a434-baf3-4884-84a0-2f107f447ca3",
 		"name": "01 - RESTful API Fundamentals",
+		"description": "# 01 - RESTful API Fundamentals\n\n## Overview\n\nThis collection demonstrates core RESTful API testing skills using JSONPlaceholder, a free fake API for testing and prototyping. It covers all fundamental CRUD operations (Create, Read, Update, Delete) with comprehensive test validation.\n\n## API Used\n\n- **jsonplaceholder_url:** [https://jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com)\n    \n- **Documentation**: [https://jsonplaceholder.typicode.com/guide/](https://jsonplaceholder.typicode.com/guide/)\n    \n\n## Features Demonstrated\n\n- ✅ GET requests with and without parameters\n    \n- ✅ POST requests with static and dynamic data\n    \n- ✅ PUT requests (full updates)\n    \n- ✅ PATCH requests (partial updates)\n    \n- ✅ DELETE requests\n    \n- ✅ Response validation (status codes, data types, structure)\n    \n- ✅ Response time testing\n    \n- ✅ Data extraction and variable storage\n    \n- ✅ Email format validation with regex\n    \n- ✅ Array and object validation\n    \n- ✅ Dynamic data generation using Postman variables\n    \n\n## Collection Contents\n\n### 1\\. GET All Posts\n\n- Retrieves all posts from the API\n    \n- Validates response is an array with 100+ elements\n    \n- Extracts and saves first user ID for later use\n    \n- Tests each post has required fields (userId, id, title, body)\n    \n\n### 2\\. GET Single Post\n\n- Retrieves a specific post by ID\n    \n- Validates response structure and data types\n    \n- Confirms correct post ID is returned\n    \n\n### 3\\. GET Post Comments\n\n- Retrieves all comments for a specific post\n    \n- Validates all comments belong to the correct post\n    \n- Tests email format using regex validation\n    \n- Logs total comment count\n    \n\n### 4\\. GET with Query Parameters\n\n- Demonstrates filtering posts by userId\n    \n- Validates query parameter filtering works correctly\n    \n- Includes random post selection for testing variety\n    \n\n### 5\\. Create New Post\n\n- Creates a new post with static data\n    \n- Validates 201 Created status code\n    \n- Confirms response contains all submitted data\n    \n- Saves created post ID for later operations\n    \n\n### 6\\. Create New Post with Dynamic Data\n\n- Uses Postman's built-in variables for dynamic content\n    \n- Generates random titles and body content\n    \n- Validates dynamic data is correctly stored\n    \n\n### 7\\. Update Entire Post (PUT)\n\n- Demonstrates full resource update\n    \n- Uses dynamic data generation\n    \n- Validates all fields are updated correctly\n    \n\n### 8\\. Partial Update Post (PATCH)\n\n- Updates only the title field\n    \n- Validates other fields remain unchanged\n    \n- Shows difference between PUT and PATCH\n    \n\n### 9\\. Delete Post\n\n- Removes a post by ID\n    \n- Validates successful deletion (200 status)\n    \n- Confirms empty response body\n    \n\n## Test Coverage\n\n- Status code validation (200, 201)\n    \n- Response time performance testing (< 1000ms)\n    \n- Data type validation (arrays, objects, strings, numbers)\n    \n- Field existence and structure validation\n    \n- Email format validation using regex\n    \n- Dynamic data generation and validation\n    \n- Collection variable management\n    \n\n## Variables Used\n\n| Variable | Purpose |\n| --- | --- |\n| `jsonplaceholder_url` | API base URL ([https://jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com)) |\n| `firstUserId` | Stores first user ID from responses |\n| `firstPostId` | Stores created post ID |\n| `postTitle` | Dynamic post title |\n| `postBody` | Dynamic post body content |\n\n## How to Run\n\n1. Set the `jsonplaceholder_url` collection variable to: `https://jsonplaceholder.typicode.com`\n    \n2. Run the entire collection using Collection Runner\n    \n3. Review test results in the Test Results tab\n    \n4. Check console for detailed logging output\n    \n\n## Prerequisites\n\n- Postman Desktop App or Postman Web\n    \n- Internet connection\n    \n- No authentication required\n    \n\n## Skills Showcased\n\n- RESTful API testing fundamentals\n    \n- HTTP methods (GET, POST, PUT, PATCH, DELETE)\n    \n- Test script writing in JavaScript\n    \n- Response validation and assertions\n    \n- Dynamic data generation\n    \n- Variable management and data flow\n    \n- Regex pattern matching\n    \n- Pre-request and test scripts",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "48982578",
-		"_collection_link": "https://www.postman.com/patmcdaniel37-5264329/workspace/525a51e9-7535-4d44-b9b5-1a0a35d42ce5/collection/48982578-0079a434-baf3-4884-84a0-2f107f447ca3?action=share&source=collection_link&creator=48982578"
+		"_collection_link": "https://www.postman.com/patmcdaniel37-5264329/workspace/api-testing/collection/48982578-0079a434-baf3-4884-84a0-2f107f447ca3?action=share&source=collection_link&creator=48982578"
 	},
 	"item": [
 		{
@@ -63,8 +64,12 @@
 				{
 					"listen": "prerequest",
 					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
 						"packages": {},
-						"type": "text/javascript"
+						"requests": {}
 					}
 				}
 			],
@@ -72,14 +77,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/posts",
+					"raw": "{{jsonplaceholder_url}}/posts",
 					"host": [
-						"{{base_url}}"
+						"{{jsonplaceholder_url}}"
 					],
 					"path": [
 						"posts"
 					]
-				}
+				},
+				"description": "### 1\\. GET All Posts\n\n- Retrieves all posts from the API\n    \n- Validates response is an array with 100+ elements\n    \n- Extracts and saves first user ID for later use\n    \n- Tests each post has required fields (userId, id, title, body)"
 			},
 			"response": []
 		},
@@ -136,15 +142,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/posts/1",
+					"raw": "{{jsonplaceholder_url}}/posts/1",
 					"host": [
-						"{{base_url}}"
+						"{{jsonplaceholder_url}}"
 					],
 					"path": [
 						"posts",
 						"1"
 					]
-				}
+				},
+				"description": "### 2\\. GET Single Post\n\n- Retrieves a specific post by ID\n    \n- Validates response structure and data types\n    \n- Confirms correct post ID is returned"
 			},
 			"response": []
 		},
@@ -199,8 +206,12 @@
 				{
 					"listen": "prerequest",
 					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
 						"packages": {},
-						"type": "text/javascript"
+						"requests": {}
 					}
 				}
 			],
@@ -208,16 +219,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/posts/1/comments",
+					"raw": "{{jsonplaceholder_url}}/posts/1/comments",
 					"host": [
-						"{{base_url}}"
+						"{{jsonplaceholder_url}}"
 					],
 					"path": [
 						"posts",
 						"1",
 						"comments"
 					]
-				}
+				},
+				"description": "### 3\\. GET Post Comments\n\n- Retrieves all comments for a specific post\n    \n- Validates all comments belong to the correct post\n    \n- Tests email format using regex validation\n    \n- Logs total comment count"
 			},
 			"response": []
 		},
@@ -282,9 +294,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/posts?userId=1",
+					"raw": "{{jsonplaceholder_url}}/posts?userId=1",
 					"host": [
-						"{{base_url}}"
+						"{{jsonplaceholder_url}}"
 					],
 					"path": [
 						"posts"
@@ -295,7 +307,8 @@
 							"value": "1"
 						}
 					]
-				}
+				},
+				"description": "### 4\\. GET with Query Parameters\n\n- Demonstrates filtering posts by userId\n    \n- Validates query parameter filtering works correctly\n    \n- Includes random post selection for testing variety"
 			},
 			"response": []
 		},
@@ -365,14 +378,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/posts",
+					"raw": "{{jsonplaceholder_url}}/posts",
 					"host": [
-						"{{base_url}}"
+						"{{jsonplaceholder_url}}"
 					],
 					"path": [
 						"posts"
 					]
-				}
+				},
+				"description": "### 5\\. Create New Post\n\n- Creates a new post with static data\n    \n- Validates 201 Created status code\n    \n- Confirms response contains all submitted data\n    \n- Saves created post ID for later operations"
 			},
 			"response": []
 		},
@@ -442,19 +456,20 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/posts",
+					"raw": "{{jsonplaceholder_url}}/posts",
 					"host": [
-						"{{base_url}}"
+						"{{jsonplaceholder_url}}"
 					],
 					"path": [
 						"posts"
 					]
-				}
+				},
+				"description": "### 6\\. Create New Post with Dynamic Data\n\n- Uses Postman's built-in variables for dynamic content\n    \n- Generates random titles and body content\n    \n- Validates dynamic data is correctly stored"
 			},
 			"response": []
 		},
 		{
-			"name": "Delete Post",
+			"name": "Update Post",
 			"event": [
 				{
 					"listen": "test",
@@ -470,11 +485,18 @@
 							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
 							"});",
 							"",
-							"//validate response is empty",
-							"pm.test(\"Response for delete should be empty\", function(){",
-							"    pm.expect(pm.response.json()).to.eql({});",
+							"//validate each post has userId, id, title, body",
+							"pm.test(\"Each post has userId, id, title, body\", function(){",
+							"        pm.expect(pm.response.json()).to.have.property(\"id\");",
+							"        pm.expect(pm.response.json()).to.have.property(\"title\");",
+							"        pm.expect(pm.response.json()).to.have.property(\"body\");",
+							"        pm.expect(pm.response.json()).to.have.property(\"userId\");",
 							"});",
-							""
+							"",
+							"//validate the title returned is what was set in the pre-test",
+							"pm.test(\"Validate title is correct'\", function () {",
+							"    pm.expect(pm.response.json().title).to.eql(pm.variables.get(\"postTitle\"));",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {},
@@ -485,7 +507,13 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"console.log(\"Deleting post with id 1...\")"
+							"// Generate random title and body using pm.variables.set",
+							"const randomTitle = pm.variables.replaceIn(\"{{$randomWord}} Post Title\");",
+							"const randomBody = pm.variables.replaceIn(\"This is a body with {{$randomWord}} content\");",
+							"",
+							"pm.variables.set(\"postTitle\", randomTitle);",
+							"pm.variables.set(\"postBody\", randomBody);",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {},
@@ -494,11 +522,11 @@
 				}
 			],
 			"request": {
-				"method": "DELETE",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\n    \"id\": 1,\n    \"title\": \"{{postTitle}}\",\n    \"body\": \"{{postBody}}\",\n    \"userId\": {{firstUserId}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -506,15 +534,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/posts/1",
+					"raw": "{{jsonplaceholder_url}}/posts/1",
 					"host": [
-						"{{base_url}}"
+						"{{jsonplaceholder_url}}"
 					],
 					"path": [
 						"posts",
 						"1"
 					]
-				}
+				},
+				"description": "### 7\\. Update Entire Post (PUT)\n\n- Demonstrates full resource update\n    \n- Uses dynamic data generation\n    \n- Validates all fields are updated correctly"
 			},
 			"response": []
 		},
@@ -593,15 +622,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/posts/1",
+					"raw": "{{jsonplaceholder_url}}/posts/1",
 					"host": [
-						"{{base_url}}"
+						"{{jsonplaceholder_url}}"
 					],
 					"path": [
 						"posts",
 						"1"
 					]
-				}
+				},
+				"description": "### 8\\. Partial Update Post (PATCH)\n\n- Updates only the title field\n    \n- Validates other fields remain unchanged\n    \n- Shows difference between PUT and PATCH"
 			},
 			"response": []
 		},
@@ -622,18 +652,11 @@
 							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
 							"});",
 							"",
-							"//validate each post has userId, id, title, body",
-							"pm.test(\"Each post has userId, id, title, body\", function(){",
-							"        pm.expect(pm.response.json()).to.have.property(\"id\");",
-							"        pm.expect(pm.response.json()).to.have.property(\"title\");",
-							"        pm.expect(pm.response.json()).to.have.property(\"body\");",
-							"        pm.expect(pm.response.json()).to.have.property(\"userId\");",
+							"//validate response is empty",
+							"pm.test(\"Response for delete should be empty\", function(){",
+							"    pm.expect(pm.response.json()).to.eql({});",
 							"});",
-							"",
-							"//validate the title returned is what was set in the pre-test",
-							"pm.test(\"Validate title is correct'\", function () {",
-							"    pm.expect(pm.response.json().title).to.eql(pm.variables.get(\"postTitle\"));",
-							"});"
+							""
 						],
 						"type": "text/javascript",
 						"packages": {},
@@ -644,13 +667,7 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"// Generate random title and body using pm.variables.set",
-							"const randomTitle = pm.variables.replaceIn(\"{{$randomWord}} Post Title\");",
-							"const randomBody = pm.variables.replaceIn(\"This is a body with {{$randomWord}} content\");",
-							"",
-							"pm.variables.set(\"postTitle\", randomTitle);",
-							"pm.variables.set(\"postBody\", randomBody);",
-							""
+							"console.log(\"Deleting post with id 1...\")"
 						],
 						"type": "text/javascript",
 						"packages": {},
@@ -659,11 +676,11 @@
 				}
 			],
 			"request": {
-				"method": "PUT",
+				"method": "DELETE",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"title\": \"{{postTitle}}\",\n    \"body\": \"{{postBody}}\",\n    \"userId\": {{firstUserId}}\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -671,15 +688,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/posts/1",
+					"raw": "{{jsonplaceholder_url}}/posts/1",
 					"host": [
-						"{{base_url}}"
+						"{{jsonplaceholder_url}}"
 					],
 					"path": [
 						"posts",
 						"1"
 					]
-				}
+				},
+				"description": "### 9\\. Delete Post\n\n- Removes a post by ID\n    \n- Validates successful deletion (200 status)\n    \n- Confirms empty response body"
 			},
 			"response": []
 		}
@@ -710,36 +728,37 @@
 	],
 	"variable": [
 		{
-			"key": "base_url",
-			"value": ""
-		},
-		{
 			"key": "response",
-			"value": ""
+			"value": {
+				"title": "myTestTitle",
+				"body": "myTestBody",
+				"userId": 1,
+				"id": 101
+			}
 		},
 		{
 			"key": "first_post_body",
-			"value": ""
+			"value": "myTestBody"
 		},
 		{
 			"key": "first_post_user_id",
-			"value": ""
+			"value": 1
 		},
 		{
 			"key": "first_post_id",
-			"value": ""
+			"value": 101
 		},
 		{
 			"key": "first_user_id",
-			"value": ""
+			"value": 1
 		},
 		{
 			"key": "firstUserId",
-			"value": ""
+			"value": 1
 		},
 		{
 			"key": "firstPostId",
-			"value": ""
+			"value": 101
 		}
 	]
 }

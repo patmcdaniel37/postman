@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "88e1a7b6-979a-4f33-932e-5478dc50eee6",
 		"name": "02 - Authentication/Authorization",
+		"description": "# 02 - Authentication/Authorization\n\n## Overview\n\nThis collection demonstrates comprehensive authentication and authorization testing using the Restful-Booker API. It showcases token-based authentication, secure request handling, and complete CRUD operations on protected endpoints with proper credential management.\n\n## API Used\n\n- **Base URL**: [https://restful-booker.herokuapp.com](https://restful-booker.herokuapp.com)\n    \n- **Documentation**: [https://restful-booker.herokuapp.com/apidoc/index.html](https://restful-booker.herokuapp.com/apidoc/index.html)\n    \n- **Authentication Type**: Token-based (Cookie)\n    \n\n## Features Demonstrated\n\n- ✅ Token generation and management\n    \n- ✅ Authentication validation (success and failure scenarios)\n    \n- ✅ Secure header implementation (Cookie-based auth)\n    \n- ✅ Protected endpoint testing\n    \n- ✅ Dynamic date generation for bookings\n    \n- ✅ Complete booking lifecycle management\n    \n- ✅ Negative testing (invalid credentials, deleted resources)\n    \n- ✅ Date calculations and formatting\n    \n- ✅ Token masking for security logging\n    \n\n## Collection Contents\n\n### 1\\. Create Token\n\n- Authenticates with valid credentials\n    \n- Generates authentication token\n    \n- Validates token format (hexadecimal)\n    \n- Stores token securely in collection variables\n    \n- Implements token masking in console logs for security\n    \n- **Credentials**: username: `admin`, password: `password123`\n    \n\n### 2\\. Invalid Credentials\n\n- Tests authentication failure scenarios\n    \n- Validates proper error handling\n    \n- Confirms \"Bad credentials\" error message\n    \n- Demonstrates negative testing practices\n    \n\n### 3\\. Get All Bookings\n\n- Retrieves complete list of bookings\n    \n- Validates response is an array\n    \n- Stores multiple booking IDs for testing\n    \n- Logs total number of bookings\n    \n- No authentication required\n    \n\n### 4\\. Get Booking By ID\n\n- Retrieves specific booking details\n    \n- Validates complete booking structure\n    \n- Tests date format validation (YYYY-MM-DD)\n    \n- Confirms data type integrity (numbers, strings, booleans)\n    \n- Validates nested objects (bookingdates)\n    \n\n### 5\\. Create Booking\n\n- Creates new booking with dynamic dates\n    \n- Generates check-in (today) and check-out (today + 7 days) automatically\n    \n- Requires authentication token\n    \n- Calculates and logs total stay duration\n    \n- Stores created booking ID for subsequent operations\n    \n\n### 6\\. Update Booking With Auth\n\n- Performs full booking update (PUT)\n    \n- Requires valid authentication token\n    \n- Updates check-in to today + 14 days\n    \n- Updates check-out to today + 21 days\n    \n- Validates all fields are updated correctly\n    \n- Confirms date changes match expectations\n    \n\n### 7\\. Partial Update Booking With Auth\n\n- Demonstrates PATCH vs PUT differences\n    \n- Updates only specific fields (firstname, lastname, additionalneeds)\n    \n- Preserves unchanged fields\n    \n- Uses dynamic variables for update values\n    \n- Requires authentication\n    \n\n### 8\\. Delete Booking\n\n- Removes booking by ID\n    \n- Validates successful deletion (201 status)\n    \n- Requires authentication token\n    \n- Cleans up test data\n    \n\n### 9\\. Get Deleted Booking\n\n- Verifies booking was successfully deleted\n    \n- Tests 404 Not Found response\n    \n- Demonstrates proper error handling\n    \n- Confirms deletion completeness\n    \n\n## Test Coverage\n\n- ✅ Authentication success and failure\n    \n- ✅ Token validation and storage\n    \n- ✅ Status code validation (200, 201, 404)\n    \n- ✅ Response structure validation\n    \n- ✅ Data type validation\n    \n- ✅ Date format validation (regex)\n    \n- ✅ Nested object validation\n    \n- ✅ Security best practices (token masking)\n    \n- ✅ Dynamic data generation\n    \n- ✅ Date calculations\n    \n- ✅ Authorization header implementation\n    \n\n## Workflow Dependencies\n\n**Sequential Execution Required:**\n\n1. **Create Token** (must run first to generate auth token)\n    \n2. **Create Booking** (stores booking_id for updates/deletes)\n    \n3. **Update Booking With Auth** (uses token and booking_id)\n    \n4. **Partial Update Booking With Auth** (uses token and booking_id)\n    \n5. **Delete Booking** (uses token and booking_id)\n    \n6. **Get Deleted Booking** (verifies deletion)\n    \n\n## Variables Used\n\n| Variable | Purpose | Scope |\n| --- | --- | --- |\n| `base_url` | API base URL | Collection |\n| `username` | Authentication username (admin) | Collection |\n| `password` | Authentication password (password123) | Collection |\n| `token` | Authentication token | Collection |\n| `firstBookingId` | First booking ID from list | Collection |\n| `seconBookingId` | Second booking ID from list | Collection |\n| `booking_id` | Created booking ID | Environment |\n| `checkin` | Dynamic check-in date | Request |\n| `checkout` | Dynamic check-out date | Request |\n| `additionalneeds` | Dynamic additional needs | Request |\n\n## Dynamic Features\n\n### Date Generation\n\n- Automatically calculates check-in and check-out dates\n    \n- Uses ISO 8601 format (YYYY-MM-DD)\n    \n- Generates dates relative to today\n    \n- Stay duration calculation in days\n    \n\n### Token Security\n\n- Token masking in logs (shows first 4 and last 4 characters only)\n    \n- Secure storage in collection variables\n    \n- Automatic token injection in protected requests\n    \n\n## How to Run\n\n### Setup\n\n1. Set collection variables:\n    \n    - `base_url`: `https://restful-booker.herokuapp.com`\n        \n    - `username`: `admin`\n        \n    - `password`: `password123`\n        \n\n### Execution Order\n\n**Option 1: Full Collection Run**\n\n1. Run entire collection using Collection Runner\n    \n2. Requests execute in order automatically\n    \n3. Token and IDs propagate through workflow\n    \n\n**Option 2: Individual Requests**\n\n1. Run \"Create Token\" first\n    \n2. Run \"Create Booking\" second\n    \n3. Run any other requests (they will use stored token and booking_id)\n    \n\n### Newman CLI\n\n``` bash\nnewman run \"02-Authentication-Authorization.postman_collection.json\" \\\n  --environment your-environment.json \\\n  --reporters cli,htmlextra\n\n ```\n\n## Prerequisites\n\n- Postman Desktop App or Postman Web\n    \n- Internet connection\n    \n- No API key required (public test API)\n    \n\n## Skills Showcased\n\n- Token-based authentication implementation\n    \n- Secure credential handling\n    \n- Cookie-based authorization headers\n    \n- Dynamic date generation and formatting\n    \n- Pre-request script automation\n    \n- Variable chaining across requests\n    \n- Negative testing strategies\n    \n- Security best practices (token masking)\n    \n- Complete CRUD workflow testing\n    \n- Date calculations and validations\n    \n- Regex pattern matching\n    \n- Error handling and validation\n    \n\n## Security Notes\n\n- ⚠️ This is a public test API with publicly known credentials\n    \n- ✅ Token masking implemented in console logs\n    \n- ✅ Demonstrates proper authentication flow\n    \n- ✅ Shows secure header implementation\n    \n- 📝 In production, never log full tokens or credentials",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "48982578",
 		"_collection_link": "https://www.postman.com/patmcdaniel37-5264329/workspace/api-testing/collection/48982578-88e1a7b6-979a-4f33-932e-5478dc50eee6?action=share&source=collection_link&creator=48982578"
@@ -72,14 +73,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/auth",
+					"raw": "{{restful_booker_url}}/auth",
 					"host": [
-						"{{base_url}}"
+						"{{restful_booker_url}}"
 					],
 					"path": [
 						"auth"
 					]
-				}
+				},
+				"description": "### 1\\. Create Token\n\n- Authenticates with valid credentials\n    \n- Generates authentication token\n    \n- Validates token format (hexadecimal)\n    \n- Stores token securely in collection variables\n    \n- Implements token masking in console logs for security\n    \n- **Credentials**: username: `admin`, password: `password123`"
 			},
 			"response": []
 		},
@@ -119,14 +121,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/auth",
+					"raw": "{{restful_booker_url}}/auth",
 					"host": [
-						"{{base_url}}"
+						"{{restful_booker_url}}"
 					],
 					"path": [
 						"auth"
 					]
-				}
+				},
+				"description": "### 2\\. Invalid Credentials\n\n- Tests authentication failure scenarios\n    \n- Validates proper error handling\n    \n- Confirms \"Bad credentials\" error message\n    \n- Demonstrates negative testing practices"
 			},
 			"response": []
 		},
@@ -150,12 +153,12 @@
 							"",
 							"//store first bookingID as environment variable (this doesn't appear to change)",
 							"pm.test(\"Store first bookingID as environment variable\", function () {",
-							"    pm.collectionVariables.set(\"firstBookingId\", pm.response.json()[0].bookingid);",
+							"    pm.collectionVariables.set(\"first_booking_id\", pm.response.json()[0].bookingid);",
 							"});",
 							"",
 							"//store second bookingID as environment variable (this appears to change)",
 							"pm.test(\"Store first bookingID as environment variable\", function () {",
-							"    pm.collectionVariables.set(\"seconBookingId\", pm.response.json()[1].bookingid);",
+							"    pm.collectionVariables.set(\"second_booking_id\", pm.response.json()[1].bookingid);",
 							"});",
 							"",
 							"//total number of bookingID",
@@ -179,14 +182,15 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{base_url}}/booking",
+					"raw": "{{restful_booker_url}}/booking",
 					"host": [
-						"{{base_url}}"
+						"{{restful_booker_url}}"
 					],
 					"path": [
 						"booking"
 					]
-				}
+				},
+				"description": "### 3\\. Get All Bookings\n\n- Retrieves complete list of bookings\n    \n- Validates response is an array\n    \n- Stores multiple booking IDs for testing\n    \n- Logs total number of bookings\n    \n- No authentication required"
 			},
 			"response": []
 		},
@@ -262,9 +266,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/booking/:id",
+					"raw": "{{restful_booker_url}}/booking/:id",
 					"host": [
-						"{{base_url}}"
+						"{{restful_booker_url}}"
 					],
 					"path": [
 						"booking",
@@ -273,10 +277,11 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "{{seconBookingId}}"
+							"value": "{{second_booking_id}}"
 						}
 					]
-				}
+				},
+				"description": "### 4\\. Get Booking By ID\n\n- Retrieves specific booking details\n    \n- Validates complete booking structure\n    \n- Tests date format validation (YYYY-MM-DD)\n    \n- Confirms data type integrity (numbers, strings, booleans)\n    \n- Validates nested objects (bookingdates)"
 			},
 			"response": []
 		},
@@ -365,14 +370,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/booking",
+					"raw": "{{restful_booker_url}}/booking",
 					"host": [
-						"{{base_url}}"
+						"{{restful_booker_url}}"
 					],
 					"path": [
 						"booking"
 					]
-				}
+				},
+				"description": "### 5\\. Create Booking\n\n- Creates new booking with dynamic dates\n    \n- Generates check-in (today) and check-out (today + 7 days) automatically\n    \n- Requires authentication token\n    \n- Calculates and logs total stay duration\n    \n- Stores created booking ID for subsequent operations"
 			},
 			"response": []
 		},
@@ -460,15 +466,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/booking/{{booking_id}}",
+					"raw": "{{restful_booker_url}}/booking/{{booking_id}}",
 					"host": [
-						"{{base_url}}"
+						"{{restful_booker_url}}"
 					],
 					"path": [
 						"booking",
 						"{{booking_id}}"
 					]
-				}
+				},
+				"description": "### 6\\. Update Booking With Auth\n\n- Performs full booking update (PUT)\n    \n- Requires valid authentication token\n    \n- Updates check-in to today + 14 days\n    \n- Updates check-out to today + 21 days\n    \n- Validates all fields are updated correctly\n    \n- Confirms date changes match expectations"
 			},
 			"response": []
 		},
@@ -539,16 +546,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/booking/{{booking_id}}",
+					"raw": "{{restful_booker_url}}/booking/{{booking_id}}",
 					"host": [
-						"{{base_url}}"
+						"{{restful_booker_url}}"
 					],
 					"path": [
 						"booking",
 						"{{booking_id}}"
 					]
 				},
-				"description": "This request must be run after running:  \n1\\. Create Token\n\n2\\. Create Booking"
+				"description": "### 7\\. Partial Update Booking With Auth\n\n- Demonstrates PATCH vs PUT differences\n    \n- Updates only specific fields (firstname, lastname, additionalneeds)\n    \n- Preserves unchanged fields\n    \n- Uses dynamic variables for update values\n    \n- Requires authentication"
 			},
 			"response": []
 		},
@@ -601,16 +608,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/booking/{{booking_id}}",
+					"raw": "{{restful_booker_url}}/booking/{{booking_id}}",
 					"host": [
-						"{{base_url}}"
+						"{{restful_booker_url}}"
 					],
 					"path": [
 						"booking",
 						"{{booking_id}}"
 					]
 				},
-				"description": "This request must be run after running:  \n1\\. Create Token\n\n2\\. Create Booking"
+				"description": "### 8\\. Delete Booking\n\n- Removes booking by ID\n    \n- Validates successful deletion (201 status)\n    \n- Requires authentication token\n    \n- Cleans up test data"
 			},
 			"response": []
 		},
@@ -666,16 +673,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/booking/{{booking_id}}",
+					"raw": "{{restful_booker_url}}/booking/{{booking_id}}",
 					"host": [
-						"{{base_url}}"
+						"{{restful_booker_url}}"
 					],
 					"path": [
 						"booking",
 						"{{booking_id}}"
 					]
 				},
-				"description": "This request must be run after running:  \n1\\. Create Token\n\n2\\. Create Booking"
+				"description": "### 9\\. Get Deleted Booking\n\n- Verifies booking was successfully deleted\n    \n- Tests 404 Not Found response\n    \n- Demonstrates proper error handling\n    \n- Confirms deletion completeness"
 			},
 			"response": []
 		}
@@ -706,36 +713,24 @@
 	],
 	"variable": [
 		{
-			"key": "base_url",
-			"value": ""
-		},
-		{
 			"key": "username",
-			"value": ""
+			"value": "admin"
 		},
 		{
 			"key": "password",
-			"value": ""
+			"value": "password123"
 		},
 		{
 			"key": "first_booking_id",
-			"value": ""
+			"value": 3235
 		},
 		{
 			"key": "second_booking_id",
-			"value": ""
+			"value": 3104
 		},
 		{
 			"key": "token",
-			"value": ""
-		},
-		{
-			"key": "firstBookingId",
-			"value": ""
-		},
-		{
-			"key": "seconBookingId",
-			"value": ""
+			"value": "7d654794dc86ada"
 		}
 	]
 }

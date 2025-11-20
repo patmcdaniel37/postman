@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "e42aafd1-faa3-46ea-86f6-eaf5b3100128",
 		"name": "05 - E2E Shopping Workflow",
+		"description": "# 05 - E2E Shopping Workflow\n\n## Overview\n\nThis collection demonstrates a complete end-to-end (E2E) shopping workflow simulation, representing a real-world e-commerce user journey from product browsing to checkout. It showcases sequential test automation where data flows between requests, mimicking how an actual customer would interact with an online store. This is essential for validating that all integrated components of an e-commerce system work together correctly.\n\n## API Used\n\n- **Base URL**: [https://fakestoreapi.com](https://fakestoreapi.com)\n    \n- **Documentation**: [https://fakestoreapi.com/docs](https://fakestoreapi.com/docs)\n    \n- **Authentication**: Token-based login\n    \n- **No API Key Required**: Public testing API\n    \n\n## What is E2E Testing?\n\nEnd-to-end testing validates complete user workflows from start to finish, ensuring all integrated components work together. This collection simulates:\n\n1. Customer browses products\n    \n2. Customer selects a product\n    \n3. Customer logs in\n    \n4. Customer adds product to cart\n    \n5. Customer reviews cart\n    \n6. Customer updates cart quantity\n    \n7. Customer removes items (cleanup)\n    \n\n## Features Demonstrated\n\n- ✅ Complete user journey simulation\n    \n- ✅ Sequential workflow with data dependencies\n    \n- ✅ Variable chaining across multiple requests\n    \n- ✅ Random product selection\n    \n- ✅ Authentication flow integration\n    \n- ✅ Dynamic data generation (dates, quantities)\n    \n- ✅ Cart management operations\n    \n- ✅ Price tracking and calculations\n    \n- ✅ Test data cleanup\n    \n- ✅ Real-world scenario testing\n    \n\n## User Story\n\n```\nAs a customer\nI want to browse products, add items to my cart, and manage my order\nSo that I can complete a purchase transaction\n\n ```\n\n## Workflow Steps\n\n### Step 1: Get All Products\n\n**Purpose**: Browse available products\n\n- Retrieves complete product catalog\n    \n- Validates response structure and data types\n    \n- **Randomly selects a product** for purchase simulation\n    \n- Stores selected product ID and price\n    \n- Logs total available products\n    \n\n**Key Actions**:\n\n``` javascript\n// Generate random product selection\nlet randomNumber = Math.ceil(Math.random() * json.length);\npm.collectionVariables.set(\"collection_level_random_id\", randomNumber);\npm.collectionVariables.set(\"collection_level_random_id_price\", json[randomNumber-1].price);\n\n ```\n\n### Step 2: Get Product Details\n\n**Purpose**: View detailed information about selected product\n\n- Uses product ID from Step 1\n    \n- Validates product exists\n    \n- Confirms all product details (title, price, description, rating)\n    \n- Verifies product availability\n    \n\n**Dependencies**:\n\n- Requires `collection_level_random_id` from Step 1\n    \n\n### Step 3: User Login\n\n**Purpose**: Authenticate user before shopping\n\n- Simulates customer login\n    \n- Validates authentication token generation\n    \n- Stores token for authenticated operations\n    \n- Uses valid test credentials (mor_2314 / 83r5^_)\n    \n\n**Key Actions**:\n\n``` javascript\n// Store authentication token\npm.collectionVariables.set(\"collection_level_auth_token\", json.token);\n\n ```\n\n### Step 4: Add to Cart\n\n**Purpose**: Add selected product to shopping cart\n\n- Creates new cart with selected product\n    \n- Uses authenticated user ID\n    \n- Generates current timestamp\n    \n- Creates random quantity (1-10 items)\n    \n- Stores cart ID for future operations\n    \n\n**Dynamic Generation**:\n\n``` javascript\n// Pre-request script generates:\npm.variables.set(\"currentDate\", new Date().toISOString());\npm.variables.set(\"randomQuantity\", Math.ceil(Math.random() * 10));\n\n ```\n\n**Dependencies**:\n\n- Requires `collection_level_random_id` (product ID)\n    \n- Requires `collection_level_auth_token` (authentication)\n    \n\n### Step 5: Get Cart\n\n**Purpose**: Review cart contents\n\n- Retrieves cart by ID\n    \n- Validates all products in cart\n    \n- Counts total items\n    \n- Verifies cart structure\n    \n- Confirms product quantities\n    \n\n**Dependencies**:\n\n- Requires `collection_level_new_cart_id` from Step 4\n    \n\n### Step 6: Update Cart Quantity\n\n**Purpose**: Modify cart items (change quantity)\n\n- Updates existing cart\n    \n- Changes product quantity randomly\n    \n- May update product selection\n    \n- Validates update success\n    \n- Tests cart modification capability\n    \n\n**Dynamic Updates**:\n\n``` javascript\n// Generates new random values\npm.variables.set(\"randomProductId\", Math.ceil(Math.random() * 10));\npm.variables.set(\"randomQuantity\", Math.ceil(Math.random() * 10));\n\n ```\n\n**Dependencies**:\n\n- Requires `collection_level_new_cart_id` from Step 4\n    \n\n### Step 7: Delete Cart\n\n**Purpose**: Clean up test data / Empty cart\n\n- Removes cart completely\n    \n- Validates successful deletion\n    \n- Confirms null response\n    \n- Cleans up after test execution\n    \n\n**Dependencies**:\n\n- Requires `collection_level_new_cart_id` from Step 4\n    \n\n## Test Coverage\n\n- ✅ Product browsing functionality\n    \n- ✅ Product detail retrieval\n    \n- ✅ User authentication\n    \n- ✅ Cart creation\n    \n- ✅ Cart retrieval\n    \n- ✅ Cart modification\n    \n- ✅ Cart deletion\n    \n- ✅ Status code validation (200, 201)\n    \n- ✅ Response structure validation\n    \n- ✅ Data type validation\n    \n- ✅ Nested object validation\n    \n- ✅ Random data selection\n    \n- ✅ Dynamic data generation\n    \n- ✅ Sequential workflow execution\n    \n- ✅ Variable dependency management\n    \n\n## Variables Used\n\n| Variable | Purpose | Set In | Used In |\n| --- | --- | --- | --- |\n| `base_url` | API base URL | Collection | All requests |\n| `collection_level_random_id` | Selected product ID | Step 1 | Steps 2, 4 |\n| `collection_level_random_id_price` | Product price | Step 1 | (Future calculations) |\n| `collection_level_auth_token` | Auth token | Step 3 | (Future auth requests) |\n| `collection_level_new_cart_id` | Created cart ID | Step 4 | Steps 5, 6, 7 |\n| `currentDate` | ISO 8601 timestamp | Steps 4, 6 (pre-request) | Request body |\n| `randomQuantity` | Random quantity (1-10) | Steps 4, 6 (pre-request) | Request body |\n| `randomProductId` | Random product (1-10) | Step 6 (pre-request) | Request body |\n\n## Workflow Diagram\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                    E2E Shopping Workflow                     │\n└─────────────────────────────────────────────────────────────┘\n    ┌──────────────────┐\n    │ Step 1: Browse   │──→ Store: product_id, price\n    │   All Products   │\n    └────────┬─────────┘\n             │\n             ▼\n    ┌──────────────────┐\n    │ Step 2: View     │──→ Verify: product exists\n    │ Product Details  │\n    └────────┬─────────┘\n             │\n             ▼\n    ┌──────────────────┐\n    │ Step 3: Login    │──→ Store: auth_token\n    │   (Authenticate) │\n    └────────┬─────────┘\n             │\n             ▼\n    ┌──────────────────┐\n    │ Step 4: Add to   │──→ Store: cart_id\n    │      Cart        │\n    └────────┬─────────┘\n             │\n             ▼\n    ┌──────────────────┐\n    │ Step 5: View     │──→ Verify: cart contents\n    │      Cart        │\n    └────────┬─────────┘\n             │\n             ▼\n    ┌──────────────────┐\n    │ Step 6: Update   │──→ Modify: quantity/product\n    │   Cart Quantity  │\n    └────────┬─────────┘\n             │\n             ▼\n    ┌──────────────────┐\n    │ Step 7: Delete   │──→ Cleanup: test data\n    │      Cart        │\n    └──────────────────┘\n\n ```\n\n## How to Run\n\n### Setup\n\n1. base_url = [https://fakestoreapi.com](https://fakestoreapi.com)\n    \n2. **Ensure Sequential Execution:**\n    \n    - Collection must run in order\n        \n    - Each step depends on previous steps\n        \n    - Do not skip or rearrange requests\n        \n\n### Using Postman Collection Runner\n\n**Full Workflow Execution:**\n\n1. Click on collection → **Run**\n    \n2. Ensure all requests are selected\n    \n3. Keep order as-is (sequential)\n    \n4. Click **Run 05 - E2E Shopping Workflow**\n    \n5. Watch data flow between requests in console\n    \n\n**Advanced Options:**\n\n- **Iterations**: Run workflow multiple times\n    \n- **Delay**: Add delay between requests (500-1000ms recommended)\n    \n- **Data File**: Not needed (generates random data)\n    \n\n### Using Newman CLI\n\n**Basic Execution:**\n\n``` bash\nnewman run \"05-E2E-Shopping-Workflow.postman_collection.json\" \\\n  --reporters cli,htmlextra \\\n  --reporter-htmlextra-export ./reports/e2e-report.html\n\n ```\n\n**With Delays (Recommended):**\n\n``` bash\nnewman run \"05-E2E-Shopping-Workflow.postman_collection.json\" \\\n  --delay-request 500 \\\n  --reporters cli,htmlextra\n\n ```\n\n**Multiple Iterations:**\n\n``` bash\n# Run workflow 5 times with different random products\nnewman run \"05-E2E-Shopping-Workflow.postman_collection.json\" \\\n  --iteration-count 5 \\\n  --delay-request 1000\n\n ```\n\n**Verbose Output:**\n\n``` bash\nnewman run \"05-E2E-Shopping-Workflow.postman_collection.json\" \\\n  --reporters cli \\\n  --reporter-cli-no-summary \\\n  --reporter-cli-no-failures \\\n  --color on\n\n ```\n\n## Expected Console Output\n\n```\nStep 1: Get All Products\n  Total number of entries: 20\n  Random product ID: 7\n  Random product price: 9.99\nStep 2: Get Product Details\n  ✓ Product exists\n  ✓ Product structure valid\nStep 3: User Login\n  ✓ Authentication successful\n  ✓ Token generated\nStep 4: Add to Cart\n  ✓ Cart created\n  Cart ID: 11\n  Quantity: 3\nStep 5: Get Cart\n  ✓ Cart retrieved\n  Total items: 1\nStep 6: Update Cart Quantity\n  ✓ Cart updated\n  New quantity: 7\nStep 7: Delete Cart\n  ✓ Cart deleted successfully\n  ✓ Workflow completed\n\n ```\n\n## Advanced Features\n\n### Random Product Selection\n\n``` javascript\n// Ensures different products tested in each run\nlet randomNumber = Math.ceil(Math.random() * json.length);\npm.collectionVariables.set(\"collection_level_random_id\", randomNumber);\n\n ```\n\n**Benefits**:\n\n- Tests different product scenarios\n    \n- Validates cart works with any product\n    \n- Simulates real user behavior\n    \n\n### Dynamic Quantity Generation\n\n``` javascript\n// Simulates varied order sizes\npm.variables.set(\"randomQuantity\", Math.ceil(Math.random() * 10));\n\n ```\n\n**Benefits**:\n\n- Tests quantity handling (1-10 items)\n    \n- Validates calculations\n    \n- Covers edge cases\n    \n\n### ISO 8601 Timestamp\n\n``` javascript\n// Ensures valid date format\npm.variables.set(\"currentDate\", new Date().toISOString());\n\n ```\n\n**Benefits**:\n\n- Correct date/time format\n    \n- Timezone handling\n    \n- Timestamp accuracy\n    \n\n## Failure Scenarios & Troubleshooting\n\n### Scenario 1: Step 2 Fails\n\n**Problem**: Product ID doesn't exist  \n**Cause**: Random ID generation selected invalid product  \n**Solution**: Check total products in Step 1, adjust random range\n\n### Scenario 2: Step 4 Fails\n\n**Problem**: Cart creation fails  \n**Cause**: Missing auth token or invalid product ID  \n**Solution**: Verify Step 3 completed, check variables set correctly\n\n### Scenario 3: Variable Not Found\n\n**Problem**: Request uses undefined variable  \n**Cause**: Previous step didn't complete successfully  \n**Solution**:\n\n``` javascript\n// Add defensive checks\nif (!pm.collectionVariables.get(\"collection_level_random_id\")) {\n    console.error(\"ERROR: Product ID not set!\");\n}\n\n ```\n\n### Scenario 4: All Steps Pass But Logic Wrong\n\n**Problem**: Tests pass but workflow doesn't make sense  \n**Solution**: Add validation checks:\n\n``` javascript\n// Verify cart contains correct product\npm.test(\"Cart contains selected product\", function() {\n    const cartProducts = json.products;\n    const selectedProduct = pm.collectionVariables.get(\"collection_level_product_id\");\n    const found = cartProducts.some(p => p.productId === selectedProduct);\n    pm.expect(found).to.be.true;\n});\n\n ```\n\n## Best Practices for E2E Testing\n\n### 1\\. Always Clean Up\n\n- Delete created resources (carts, orders)\n    \n- Reset variables after workflow\n    \n- Prevent test data pollution\n    \n\n### 2\\. Handle Dependencies Explicitly\n\n``` javascript\n// Check prerequisites\npm.test(\"Prerequisites met\", function() {\n    pm.expect(pm.collectionVariables.get(\"collection_level_random_id\")).to.exist;\n    pm.expect(pm.collectionVariables.get(\"collection_level_auth_token\")).to.exist;\n});\n\n ```\n\n### 3\\. Log Workflow Progress\n\n``` javascript\nconsole.log(\"========================================\");\nconsole.log(`Step ${pm.info.requestName}`);\nconsole.log(`Product ID: ${pm.collectionVariables.get(\"collection_level_random_id\")}`);\nconsole.log(`Cart ID: ${pm.collectionVariables.get(\"collection_level_new_cart_id\")}`);\nconsole.log(\"========================================\");\n\n ```\n\n### 4\\. Validate State Changes\n\n``` javascript\n// Ensure cart was actually updated\npm.test(\"Quantity changed\", function() {\n    const oldQty = pm.collectionVariables.get(\"previous_quantity\");\n    const newQty = json.products[0].quantity;\n    pm.expect(newQty).to.not.equal(oldQty);\n});\n\n ```\n\n### 5\\. Make Tests Idempotent\n\n- Each run should work independently\n    \n- Don't rely on external state\n    \n- Generate fresh data each time\n    \n\n## Extending This Workflow\n\n### Add Price Calculations\n\n``` javascript\n// Calculate total cart value\npm.test(\"Calculate cart total\", function() {\n    const price = pm.collectionVariables.get(\"collection_level_random_id_price\");\n    const quantity = json.products[0].quantity;\n    const total = price * quantity;\n    console.log(`Unit Price: $${price}`);\n    console.log(`Quantity: ${quantity}`);\n    console.log(`Total: $${total.toFixed(2)}`);\n    pm.collectionVariables.set(\"cart_total\", total);\n});\n\n ```\n\n### Add Multiple Products\n\n``` javascript\n// Create cart with multiple products\n\"products\": [\n    {\n        \"productId\": pm.collectionVariables.get(\"product_1\"),\n        \"quantity\": 2\n    },\n    {\n        \"productId\": pm.collectionVariables.get(\"product_2\"),\n        \"quantity\": 1\n    }\n]\n\n ```\n\n### Add Checkout Step\n\n``` javascript\n// Step 8: Checkout (simulate payment)\npm.test(\"Process checkout\", function() {\n    const total = pm.collectionVariables.get(\"cart_total\");\n    pm.expect(total).to.be.above(0);\n    console.log(`Processing payment: $${total}`);\n});\n\n ```\n\n### Add Inventory Validation\n\n``` javascript\n// Verify product has sufficient stock\npm.test(\"Sufficient inventory\", function() {\n    const requestedQty = json.products[0].quantity;\n    const availableQty = json.rating.count; // Using rating count as mock inventory\n    pm.expect(availableQty).to.be.at.least(requestedQty);\n});\n\n ```\n\n## CI/CD Integration\n\n### GitHub Actions Example\n\n``` yaml\nname: E2E Shopping Tests\non:\n  push:\n    branches: [ main ]\n  schedule:\n    - cron: '0 */6 * * *'  # Every 6 hours\njobs:\n  e2e-tests:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v2\n      - uses: actions/setup-node@v2\n      - name: Install Newman\n        run: npm install -g newman newman-reporter-htmlextra\n      - name: Run E2E Workflow\n        run: |\n          newman run \"05-E2E-Shopping-Workflow.postman_collection.json\" \\\n            --reporters cli,htmlextra \\\n            --reporter-htmlextra-export ./reports/e2e-report.html \\\n            --delay-request 500\n      - name: Upload Results\n        uses: actions/upload-artifact@v2\n        if: always()\n        with:\n          name: test-results\n          path: reports/\n\n ```\n\n## Prerequisites\n\n- Postman Desktop App or Postman Web\n    \n- Internet connection\n    \n- No API key required\n    \n- Valid login credentials (provided in collection)\n    \n\n## Skills Showcased\n\n- End-to-end workflow automation\n    \n- Sequential test dependencies\n    \n- Variable chaining across requests\n    \n- Random data selection strategies\n    \n- Dynamic data generation (dates, quantities)\n    \n- Authentication flow integration\n    \n- Cart management operations\n    \n- State management between requests\n    \n- Test data cleanup\n    \n- Pre-request script automation\n    \n- Real-world scenario simulation\n    \n- User journey testing\n    \n- Integration testing\n    \n- Workflow validation\n    \n- Console logging for debugging\n    \n\n## Real-World Applications\n\n1. **E-commerce Testing**: Complete shopping flow validation\n    \n2. **User Acceptance Testing**: Verify customer journeys work\n    \n3. **Regression Testing**: Ensure workflow still functions after changes\n    \n4. **Smoke Testing**: Quick validation of critical paths\n    \n5. **Integration Testing**: Verify all components work together\n    \n6. **Load Testing**: Run workflow with multiple iterations\n    \n7. **CI/CD Pipeline**: Automated workflow validation\n    \n\n## Notes\n\n- ⚠️ **Must run sequentially** - Order matters!\n    \n- ✅ Each step depends on previous steps\n    \n- ✅ Random product selection ensures varied testing\n    \n- ✅ Auto-generated timestamps and quantities\n    \n- 📝 FakeStore API simulates operations (data doesn't persist)\n    \n- 📝 Perfect for demonstrating E2E testing concepts\n    \n- 📝 Workflow represents realistic user behavior\n    \n\n## Success Criteria\n\n✓ All 7 steps complete successfully  \n✓ Variables properly chained between requests  \n✓ Random product successfully added to cart  \n✓ Cart operations (create, read, update, delete) work  \n✓ Authentication successful  \n✓ Test data cleaned up\n\nThis collection demonstrates professional E2E testing practices essential for validating integrated systems and ensuring complete user workflows function correctly from start to finish.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "48982578",
 		"_collection_link": "https://www.postman.com/patmcdaniel37-5264329/workspace/api-testing/collection/48982578-e42aafd1-faa3-46ea-86f6-eaf5b3100128?action=share&source=collection_link&creator=48982578"
@@ -48,9 +49,9 @@
 							"//storing the Id from the second entry to be used later",
 							"let randomNumber = Math.ceil(Math.random() * json.length);",
 							"console.log(randomNumber);",
-							"pm.collectionVariables.set(\"collection_level_random_id\", randomNumber);",
+							"pm.collectionVariables.set(\"shopping_workflow_random_id\", randomNumber);",
 							"console.log(json[randomNumber-1].price); //subtract 1 since i'm using ceil in randomNumber cmd",
-							"pm.collectionVariables.set(\"collection_level_random_id_price\", json[randomNumber-1].price);"
+							"pm.collectionVariables.set(\"shopping_workflow_random_id_price\", json[randomNumber-1].price);"
 						],
 						"type": "text/javascript",
 						"packages": {},
@@ -62,14 +63,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/products",
+					"raw": "{{fake_store_url}}/products",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"products"
 					]
-				}
+				},
+				"description": "### Step 1: Get All Products\n\n**Purpose**: Browse available products\n\n- Retrieves complete product catalog\n    \n- Validates response structure and data types\n    \n- **Randomly selects a product** for purchase simulation\n    \n- Stores selected product ID and price\n    \n- Logs total available products\n    \n\n**Key Actions**:\n\n``` javascript\n// Generate random product selection\nlet randomNumber = Math.ceil(Math.random() * json.length);\npm.collectionVariables.set(\"collection_level_random_id\", randomNumber);\npm.collectionVariables.set(\"collection_level_random_id_price\", json[randomNumber-1].price);\n\n ```"
 			},
 			"response": []
 		},
@@ -112,9 +114,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/products/:id",
+					"raw": "{{fake_store_url}}/products/:id",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"products",
@@ -123,10 +125,11 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "{{collection_level_random_id}}"
+							"value": "{{shopping_workflow_random_id}}"
 						}
 					]
-				}
+				},
+				"description": "### Step 2: Get Product Details\n\n**Purpose**: View detailed information about selected product\n\n- Uses product ID from Step 1\n    \n- Validates product exists\n    \n- Confirms all product details (title, price, description, rating)\n    \n- Verifies product availability\n    \n\n**Dependencies**:\n\n- Requires `collection_level_random_id` from Step 1"
 			},
 			"response": []
 		},
@@ -187,15 +190,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/auth/login",
+					"raw": "{{fake_store_url}}/auth/login",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"auth",
 						"login"
 					]
-				}
+				},
+				"description": "### Step 3: User Login\n\n**Purpose**: Authenticate user before shopping\n\n- Simulates customer login\n    \n- Validates authentication token generation\n    \n- Stores token for authenticated operations\n    \n- Uses valid test credentials (mor_2314 / 83r5^_)\n    \n\n**Key Actions**:\n\n``` javascript\n// Store authentication token\npm.collectionVariables.set(\"collection_level_auth_token\", json.token);\n\n ```"
 			},
 			"response": []
 		},
@@ -236,7 +240,7 @@
 							"    });",
 							"});",
 							"",
-							"pm.collectionVariables.set(\"collection_level_new_cart_id\", json.id)"
+							"pm.collectionVariables.set(\"shopping_workflow_new_cart_id\", json.id)"
 						],
 						"type": "text/javascript",
 						"packages": {},
@@ -266,7 +270,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": {{collection_level_new_cart_id}},\n    \"userId\": {{collection_level_random_id}},\n    \"date\": \"{{currentDate}}\",\n    \"products\": [\n        {\n            \"productId\": {{collection_level_product_id}},\n            \"quantity\": {{randomQuantity}}\n        }\n    ],\n    \"__v\": 0\n}",
+					"raw": "{\n    \"id\": {{shopping_workflow_new_cart_id}},\n    \"userId\": {{shopping_workflow_random_id}},\n    \"date\": \"{{currentDate}}\",\n    \"products\": [\n        {\n            \"productId\": {{shopping_workflow_product_id}},\n            \"quantity\": {{randomQuantity}}\n        }\n    ],\n    \"__v\": 0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -274,15 +278,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/carts/",
+					"raw": "{{fake_store_url}}/carts/",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"carts",
 						""
 					]
-				}
+				},
+				"description": "### Step 4: Add to Cart\n\n**Purpose**: Add selected product to shopping cart\n\n- Creates new cart with selected product\n    \n- Uses authenticated user ID\n    \n- Generates current timestamp\n    \n- Creates random quantity (1-10 items)\n    \n- Stores cart ID for future operations\n    \n\n**Dynamic Generation**:\n\n``` javascript\n// Pre-request script generates:\npm.variables.set(\"currentDate\", new Date().toISOString());\npm.variables.set(\"randomQuantity\", Math.ceil(Math.random() * 10));\n\n ```"
 			},
 			"response": []
 		},
@@ -349,9 +354,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/carts/:id",
+					"raw": "{{fake_store_url}}/carts/:id",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"carts",
@@ -363,7 +368,8 @@
 							"value": "1"
 						}
 					]
-				}
+				},
+				"description": "### Step 5: Get Cart\n\n**Purpose**: Review cart contents\n\n- Retrieves cart by ID\n    \n- Validates all products in cart\n    \n- Counts total items\n    \n- Verifies cart structure\n    \n- Confirms product quantities\n    \n\n**Dependencies**:\n\n- Requires `collection_level_new_cart_id` from Step 4"
 			},
 			"response": []
 		},
@@ -404,7 +410,7 @@
 							"    });",
 							"});",
 							"",
-							"pm.collectionVariables.set(\"collection_level_new_cart_id\", json.id)"
+							"pm.collectionVariables.set(\"shopping_workflow_new_cart_id\", json.id)"
 						],
 						"type": "text/javascript",
 						"packages": {},
@@ -434,7 +440,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": {{collection_level_new_cart_id}},\n    \"userId\": 1,\n    \"date\": \"{{currentDate}}\",\n    \"products\": [\n        {\n            \"productId\": {{randomProductId}},\n            \"quantity\": {{randomQuantity}}\n        }\n    ]\n}\n",
+					"raw": "{\n    \"id\": {{shopping_workflow_new_cart_id}},\n    \"userId\": 1,\n    \"date\": \"{{currentDate}}\",\n    \"products\": [\n        {\n            \"productId\": {{randomProductId}},\n            \"quantity\": {{randomQuantity}}\n        }\n    ]\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -442,9 +448,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/carts/:id",
+					"raw": "{{fake_store_url}}/carts/:id",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"carts",
@@ -453,10 +459,11 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "{{collection_level_new_cart_id}}"
+							"value": "{{shopping_workflow_new_cart_id}}"
 						}
 					]
-				}
+				},
+				"description": "### Step 6: Update Cart Quantity\n\n**Purpose**: Modify cart items (change quantity)\n\n- Updates existing cart\n    \n- Changes product quantity randomly\n    \n- May update product selection\n    \n- Validates update success\n    \n- Tests cart modification capability\n    \n\n**Dynamic Updates**:\n\n``` javascript\n// Generates new random values\npm.variables.set(\"randomProductId\", Math.ceil(Math.random() * 10));\npm.variables.set(\"randomQuantity\", Math.ceil(Math.random() * 10));\n\n ```\n\n**Dependencies**:\n\n- Requires `collection_level_new_cart_id` from Step 4"
 			},
 			"response": []
 		},
@@ -507,9 +514,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/carts/:id",
+					"raw": "{{fake_store_url}}/carts/:id",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"carts",
@@ -518,10 +525,11 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "{{collection_level_new_cart_id}}"
+							"value": "{{shopping_workflow_new_cart_id}}"
 						}
 					]
-				}
+				},
+				"description": "### Step 7: Delete Cart\n\n**Purpose**: Clean up test data / Empty cart\n\n- Removes cart completely\n    \n- Validates successful deletion\n    \n- Confirms null response\n    \n- Cleans up after test execution\n    \n\n**Dependencies**:\n\n- Requires `collection_level_new_cart_id` from Step 4"
 			},
 			"response": []
 		}
@@ -552,27 +560,27 @@
 	],
 	"variable": [
 		{
-			"key": "base_url",
-			"value": ""
+			"key": "shopping_workflow_product_id",
+			"value": 2
 		},
 		{
-			"key": "collection_level_product_id",
-			"value": ""
+			"key": "shopping_workflow_random_id",
+			"value": 13
 		},
 		{
-			"key": "collection_level_random_id",
-			"value": ""
+			"key": "shopping_workflow_random_id_price",
+			"value": 599
 		},
 		{
-			"key": "collection_level_random_id_price",
-			"value": ""
+			"key": "shopping_workflow_auth_token",
+			"value": "{{vault:json-web-token}}"
+		},
+		{
+			"key": "shopping_workflow_new_cart_id",
+			"value": 11
 		},
 		{
 			"key": "collection_level_auth_token",
-			"value": ""
-		},
-		{
-			"key": "collection_level_new_cart_id",
 			"value": ""
 		}
 	]

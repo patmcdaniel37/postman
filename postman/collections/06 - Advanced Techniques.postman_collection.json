@@ -101,9 +101,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/products/1",
+					"raw": "{{fake_store_url}}/products/1",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"products",
@@ -143,9 +143,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/products/1",
+					"raw": "{{fake_store_url}}/products/1",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"products",
@@ -205,9 +205,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/products",
+					"raw": "{{fake_store_url}}/products",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"products"
@@ -275,9 +275,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/products",
+					"raw": "{{fake_store_url}}/products",
 					"host": [
-						"{{base_url}}"
+						"{{fake_store_url}}"
 					],
 					"path": [
 						"products"
@@ -288,11 +288,28 @@
 			"response": []
 		}
 	],
-	"variable": [
+	"event": [
 		{
-			"key": "base_url",
-			"value": "",
-			"type": "default"
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
