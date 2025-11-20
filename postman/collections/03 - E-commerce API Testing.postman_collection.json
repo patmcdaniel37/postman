@@ -89,7 +89,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -102,6 +101,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -168,7 +168,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -181,6 +180,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"Validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -243,7 +243,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -256,6 +255,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -326,7 +326,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -339,6 +338,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -410,7 +410,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -423,6 +422,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -491,7 +491,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -504,6 +503,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 201\", function(){",
 									"        pm.response.to.have.status(201);",
@@ -576,7 +576,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -589,6 +588,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -662,7 +662,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -675,6 +674,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -822,7 +822,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -835,6 +834,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -914,7 +914,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let counter = 0;",
 									"let jsonData;",
 									"",
@@ -928,6 +927,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -1011,7 +1011,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let counter = 0;",
 									"let jsonData;",
 									"",
@@ -1025,6 +1024,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -1106,7 +1106,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let counter = 0;",
 									"let jsonData;",
 									"",
@@ -1120,6 +1119,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 201\", function(){",
 									"        pm.response.to.have.status(201);",
@@ -1207,7 +1207,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let counter = 0;",
 									"let jsonData;",
 									"",
@@ -1221,6 +1220,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -1325,6 +1325,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -1398,7 +1399,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -1411,6 +1411,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -1494,7 +1495,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let counter = 0;",
 									"let jsonData;",
 									"",
@@ -1508,6 +1508,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -1595,7 +1596,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let counter = 0;",
 									"let jsonData;",
 									"",
@@ -1609,6 +1609,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 201\", function(){",
 									"        pm.response.to.have.status(201);",
@@ -1678,7 +1679,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let counter = 0;",
 									"let jsonData;",
 									"",
@@ -1692,6 +1692,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 200\", function(){",
 									"        pm.response.to.have.status(200);",
@@ -1856,7 +1857,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const json = pm.response.json();",
 									"let jsonData;",
 									"",
 									"// Safely parse JSON",
@@ -1869,6 +1869,7 @@
 									"",
 									"// Only run further tests if JSON was successfully parsed",
 									"if (jsonData) {",
+									"    const json = pm.response.json();",
 									"    //validate response code",
 									"    pm.test(\"validate response code is 201\", function(){",
 									"        pm.response.to.have.status(201);",
