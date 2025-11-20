@@ -1625,6 +1625,7 @@
 							"host": [
 								"{{fake_store_url}}"
 							],
+                            "path": [
 							"path": [
 								"auth",
 								"login"
