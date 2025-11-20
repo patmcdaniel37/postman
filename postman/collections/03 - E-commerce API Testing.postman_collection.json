@@ -439,10 +439,10 @@
 									"});",
 									"",
 									"//saving new product to collectionVariables",
-									"pm.collectionVariables.set(\"newProduct\", json.id);",
+									"pm.collectionVariables.set(\"new_product\", json.id);",
 									"",
 									"//saving product price to collectionVariables",
-									"pm.collectionVariables.set(\"productPrice\", json.price);",
+									"pm.collectionVariables.set(\"product_price\", json.price);",
 									"",
 									""
 								],
@@ -514,7 +514,7 @@
 									"",
 									"//verify product price changed",
 									"pm.test(\"Verfiy product price changed\", function(){",
-									"    pm.expect(json.price).does.not.eq(pm.collectionVariables.get(\"productPrice\"));",
+									"    pm.expect(json.price).does.not.eq(pm.collectionVariables.get(\"product_price\"));",
 									"})",
 									""
 								],
@@ -583,7 +583,7 @@
 									"",
 									"//verify product price changed",
 									"pm.test(\"Verfiy product price changed\", function(){",
-									"    pm.expect(json.price).does.not.eq(pm.collectionVariables.get(\"productPrice\"));",
+									"    pm.expect(json.price).does.not.eq(pm.collectionVariables.get(\"product_price\"));",
 									"})",
 									""
 								],
@@ -737,15 +737,22 @@
 									"//Log the total number of entries",
 									"console.log(\"Total number of entries: \" + json.length);",
 									"//saving this value to be used for a random number in another test",
-									"pm.collectionVariables.set(\"collection_level_number_of_entries\", json.length)",
+									"pm.collectionVariables.set(\"e_commerce_number_of_entries\", json.length)",
 									"",
 									"//storeing the Id from the second entry to be used later",
 									"console.log(json[0].id);",
-									"pm.collectionVariables.set(\"collection_level_cart_id\", json[0].id);"
+									"pm.collectionVariables.set(\"e_commerce_cart_id\", json[0].id);"
 								],
 								"type": "text/javascript",
 								"packages": {},
 								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -899,7 +906,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"let randomNumber = Math.ceil(Math.random() * pm.collectionVariables.get(\"collection_level_number_of_entries\"));",
+									"let randomNumber = Math.ceil(Math.random() * pm.collectionVariables.get(\"e_commerce_number_of_entries\"));",
 									"pm.variables.set(\"id\", randomNumber);",
 									""
 								],
@@ -969,7 +976,7 @@
 									"    });",
 									"});",
 									"",
-									"pm.collectionVariables.set(\"collection_level_new_cart_id\", json.id)"
+									"pm.collectionVariables.set(\"e_commerce_new_cart_id\", json.id)"
 								],
 								"type": "text/javascript",
 								"packages": {},
@@ -1057,7 +1064,7 @@
 									"    });",
 									"});",
 									"",
-									"pm.collectionVariables.set(\"collection_level_new_cart_id\", json.id)"
+									"pm.collectionVariables.set(\"e_commerce_new_cart_id\", json.id)"
 								],
 								"type": "text/javascript",
 								"packages": {},
@@ -1087,7 +1094,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": {{collection_level_new_cart_id}},\n    \"userId\": 1,\n    \"date\": \"{{currentDate}}\",\n    \"products\": [\n        {\n            \"productId\": {{randomProductId}},\n            \"quantity\": {{randomQuantity}}\n        }\n    ]\n}\n",
+							"raw": "{\n    \"id\": {{e_commerce_new_cart_id}},\n    \"userId\": 1,\n    \"date\": \"{{currentDate}}\",\n    \"products\": [\n        {\n            \"productId\": {{randomProductId}},\n            \"quantity\": {{randomQuantity}}\n        }\n    ]\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1106,7 +1113,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{collection_level_new_cart_id}}"
+									"value": "{{e_commerce_new_cart_id}}"
 								}
 							]
 						},
@@ -1172,7 +1179,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{collection_level_new_cart_id}}"
+									"value": "{{e_commerce_new_cart_id}}"
 								}
 							]
 						},
@@ -1234,7 +1241,7 @@
 									"",
 									"//storeing the Id from the second entry to be used later",
 									"console.log(json[0].id);",
-									"pm.collectionVariables.set(\"collection_level_user_id\", json[0].id);"
+									"pm.collectionVariables.set(\"e_commerce_user_id\", json[0].id);"
 								],
 								"type": "text/javascript",
 								"packages": {},
@@ -1372,7 +1379,7 @@
 									"});",
 									"",
 									"console.log(\"New userId: \" + json.id);",
-									"pm.collectionVariables.set(\"collection_level_last_user_id\", json.id)"
+									"pm.collectionVariables.set(\"e_commerce_last_user_id\", json.id)"
 								],
 								"type": "text/javascript",
 								"packages": {},
@@ -1469,7 +1476,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": {{collection_level_last_user_id}},\n    \"username\": \"{{$randomUserName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"{{$randomPassword}}\"\n}\n",
+							"raw": "{\n    \"id\": {{e_commerce_last_user_id}},\n    \"username\": \"{{$randomUserName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"{{$randomPassword}}\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1488,7 +1495,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{collection_level_last_user_id}}"
+									"value": "{{e_commerce_last_user_id}}"
 								}
 							]
 						},
@@ -1554,7 +1561,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "{{collection_level_last_user_id}}"
+									"value": "{{e_commerce_last_user_id}}"
 								}
 							]
 						},
@@ -1593,7 +1600,7 @@
 									"});",
 									"",
 									"//storing token to be used later",
-									"pm.collectionVariables.set(\"collection_level_auth_token\", json.token);"
+									"pm.collectionVariables.set(\"e_commerce_auth_token\", json.token);"
 								],
 								"type": "text/javascript",
 								"packages": {},
@@ -1673,51 +1680,43 @@
 	"variable": [
 		{
 			"key": "category",
-			"value": ""
+			"value": "electronics"
 		},
 		{
 			"key": "new_product",
-			"value": ""
+			"value": 21
 		},
 		{
 			"key": "e_commerce_product_id",
-			"value": ""
+			"value": 2
 		},
 		{
-			"key": "productPrice",
-			"value": ""
+			"key": "product_price",
+			"value": "99.99"
 		},
 		{
-			"key": "collection_level_cart_id",
-			"value": ""
+			"key": "e_commerce_new_cart_id",
+			"value": 11
 		},
 		{
-			"key": "collection_level_number_of_entries",
-			"value": ""
+			"key": "e_commerce_number_of_entries",
+			"value": 7
 		},
 		{
-			"key": "collection_level_new_cart_id",
-			"value": ""
+			"key": "e_commerce_cart_id",
+			"value": 1
 		},
 		{
-			"key": "collection_level_user_id",
-			"value": ""
+			"key": "e_commerce_user_id",
+			"value": 1
 		},
 		{
-			"key": "collection_level_last_user_id",
-			"value": ""
+			"key": "e_commerce_last_user_id",
+			"value": 11
 		},
 		{
-			"key": "collection_level_auth_token",
-			"value": ""
-		},
-		{
-			"key": "collection_level_product_id",
-			"value": ""
-		},
-		{
-			"key": "newProduct",
-			"value": ""
+			"key": "e_commerce_auth_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXIiOiJtb3JfMjMxNCIsImlhdCI6MTc2MzY2MzkyMH0.92lTRQZq_x1lj5tWXc2TGykAXSkBsZRER1iUjJfrsUg"
 		}
 	]
 }
