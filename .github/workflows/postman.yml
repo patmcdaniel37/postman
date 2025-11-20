@@ -29,7 +29,7 @@ jobs:
       - name: Run Postman Collection
         run: |
           npx newman run "postman/collections/01 - RESTful API Fundamentals.postman_collection.json" \
-            --environment "postman/postman/environments/${{ env.ENV_FILE }}" \
+            --environment "postman/environments/${{ env.ENV_FILE }}" \
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report-01.json"
             
