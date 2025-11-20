@@ -1638,21 +1638,6 @@
 			"description": "### 🔐 Authentication (1 Request)\n\nLogin and token management.\n\n#### 1\\. Authentication\n\n- Tests login endpoint\n    \n- Uses valid credentials (mor_2314 / 83r5^_)\n    \n- Validates token generation\n    \n- Stores authentication token for future use\n    \n- Tests 201 Created response"
 		}
 	],
-	"auth": {
-		"type": "apikey",
-		"apikey": [
-			{
-				"key": "value",
-				"value": "{{vault:authorization-secret}}",
-				"type": "string"
-			},
-			{
-				"key": "key",
-				"value": "api_token",
-				"type": "string"
-			}
-		]
-	},
 	"event": [
 		{
 			"listen": "prerequest",
