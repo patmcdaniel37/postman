@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 Postman API Testing Portfolio
+# 🚀 Postman API Testing Project
 
 ![Newman Tests](https://github.com/patmcdaniel37/postman/actions/workflows/newman-tests.yml/badge.svg)
 ![Collections](https://img.shields.io/badge/collections-6-blue)
