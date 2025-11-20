@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "ba181d67-c4ae-432e-bb4a-162649d92c05",
+		"name": "04 - Data Driven Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48982578",
+		"_collection_link": "https://www.postman.com/patmcdaniel37-5264329/workspace/api-testing/collection/48982578-ba181d67-c4ae-432e-bb4a-162649d92c05?action=share&source=collection_link&creator=48982578"
+	},
+	"item": [
+		{
+			"name": "Add New Product using DDT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json();",
+							"",
+							"//validate response code",
+							"pm.test(\"validate response code is 201\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"//validate each record has id, title, price, description, category, image",
+							"pm.test(\"Each record has the correct fields\", function(){",
+							"    pm.expect(json).to.have.property('id');",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"{{title}}\",\n    \"price\": \"{{price}}\",\n    \"description\": \"{{description}}\",\n    \"image\": \"{{price}}\",\n    \"category\" : \"{{category}}\"\n}\n"
+				},
+				"url": {
+					"raw": "{{base_url}}/products",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		}
+	]
+}

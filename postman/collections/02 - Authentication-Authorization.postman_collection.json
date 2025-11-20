@@ -4,7 +4,7 @@
 		"name": "02 - Authentication/Authorization",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "48982578",
-		"_collection_link": "https://www.postman.com/patmcdaniel37-5264329/workspace/525a51e9-7535-4d44-b9b5-1a0a35d42ce5/collection/48982578-88e1a7b6-979a-4f33-932e-5478dc50eee6?action=share&source=collection_link&creator=48982578"
+		"_collection_link": "https://www.postman.com/patmcdaniel37-5264329/workspace/api-testing/collection/48982578-88e1a7b6-979a-4f33-932e-5478dc50eee6?action=share&source=collection_link&creator=48982578"
 	},
 	"item": [
 		{
@@ -72,9 +72,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{auth_base_url}}/auth",
+					"raw": "{{base_url}}/auth",
 					"host": [
-						"{{auth_base_url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"auth"
@@ -119,9 +119,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{auth_base_url}}/auth",
+					"raw": "{{base_url}}/auth",
 					"host": [
-						"{{auth_base_url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"auth"
@@ -179,9 +179,9 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{auth_base_url}}/booking",
+					"raw": "{{base_url}}/booking",
 					"host": [
-						"{{auth_base_url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"booking"
@@ -262,9 +262,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{auth_base_url}}/booking/:id",
+					"raw": "{{base_url}}/booking/:id",
 					"host": [
-						"{{auth_base_url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"booking",
@@ -365,9 +365,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{auth_base_url}}/booking",
+					"raw": "{{base_url}}/booking",
 					"host": [
-						"{{auth_base_url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"booking"
@@ -460,9 +460,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{auth_base_url}}/booking/{{booking_id}}",
+					"raw": "{{base_url}}/booking/{{booking_id}}",
 					"host": [
-						"{{auth_base_url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"booking",
@@ -539,9 +539,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{auth_base_url}}/booking/{{booking_id}}",
+					"raw": "{{base_url}}/booking/{{booking_id}}",
 					"host": [
-						"{{auth_base_url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"booking",
@@ -601,9 +601,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{auth_base_url}}/booking/{{booking_id}}",
+					"raw": "{{base_url}}/booking/{{booking_id}}",
 					"host": [
-						"{{auth_base_url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"booking",
@@ -666,9 +666,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{auth_base_url}}/booking/{{booking_id}}",
+					"raw": "{{base_url}}/booking/{{booking_id}}",
 					"host": [
-						"{{auth_base_url}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"booking",
@@ -706,7 +706,7 @@
 	],
 	"variable": [
 		{
-			"key": "auth_base_url",
+			"key": "base_url",
 			"value": ""
 		},
 		{

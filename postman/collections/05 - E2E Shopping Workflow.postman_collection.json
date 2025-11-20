@@ -1,0 +1,579 @@
+{
+	"info": {
+		"_postman_id": "e42aafd1-faa3-46ea-86f6-eaf5b3100128",
+		"name": "05 - E2E Shopping Workflow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48982578",
+		"_collection_link": "https://www.postman.com/patmcdaniel37-5264329/workspace/api-testing/collection/48982578-e42aafd1-faa3-46ea-86f6-eaf5b3100128?action=share&source=collection_link&creator=48982578"
+	},
+	"item": [
+		{
+			"name": "Step 1: Get All Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json();",
+							"",
+							"//validate response code",
+							"pm.test(\"validate response code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//validate response is an array",
+							"pm.test(\"Response is an array\", function () {",
+							"    pm.expect(json).to.be.an('array');",
+							"});",
+							"",
+							"//validate each record has id, title, price, description, category, image",
+							"pm.test(\"Each record has the correct fields\", function(){",
+							"    json.forEach(function (item) {",
+							"        pm.expect(item).to.have.property('id');",
+							"        pm.expect(item).to.have.property('title');",
+							"        pm.expect(item).to.have.property('price');",
+							"        pm.expect(item.price).to.be.a('number');",
+							"        pm.expect(item).to.have.property('description');",
+							"        pm.expect(item).to.have.property('category');",
+							"        pm.expect(item).to.have.property('image');",
+							"        pm.expect(item).to.have.property('rating');",
+							"        pm.expect(item.rating).to.have.property('rate');",
+							"        pm.expect(item.rating).to.have.property('count');",
+							"    })",
+							"});",
+							"",
+							"//Log the total number of entries",
+							"console.log(\"Total number of entries: \" + json.length);",
+							"",
+							"//storing the Id from the second entry to be used later",
+							"let randomNumber = Math.ceil(Math.random() * json.length);",
+							"console.log(randomNumber);",
+							"pm.collectionVariables.set(\"collection_level_random_id\", randomNumber);",
+							"console.log(json[randomNumber-1].price); //subtract 1 since i'm using ceil in randomNumber cmd",
+							"pm.collectionVariables.set(\"collection_level_random_id_price\", json[randomNumber-1].price);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step 2: Get Product Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"json = pm.response.json();",
+							"",
+							"//validate response code",
+							"pm.test(\"validate response code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//validate each record has id, title, price, description, category, image",
+							"pm.test(\"Each record has the correct fields\", function(){",
+							"    pm.expect(json).to.have.property('id');",
+							"    pm.expect(json).to.have.property('title');",
+							"    pm.expect(json).to.have.property('price');",
+							"    pm.expect(json.price).to.be.a('number');",
+							"    pm.expect(json).to.have.property('description');",
+							"    pm.expect(json).to.have.property('category');",
+							"    pm.expect(json).to.have.property('image');",
+							"    pm.expect(json).to.have.property('rating');",
+							"    pm.expect(json.rating).to.have.property('rate');",
+							"    pm.expect(json.rating).to.have.property('count');",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products/:id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{collection_level_random_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step 3: User Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json();",
+							"",
+							"//validate response code",
+							"pm.test(\"validate response code is 201\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"//validate response is an object (can be empty)",
+							"pm.test(\"Response is an object\", function () {",
+							"    pm.expect(json).to.be.an('object');",
+							"});",
+							"",
+							"//validate each record has id, title, price, description, category, image",
+							"pm.test(\"Each record has the correct fields\", function(){",
+							"    pm.expect(json).to.have.property('token');",
+							"});",
+							"",
+							"//storing token to be used later",
+							"pm.collectionVariables.set(\"collection_level_auth_token\", json.token);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"mor_2314\",\n    \"password\": \"83r5^_\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step 4: Add to Cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json();",
+							"let counter = 0;",
+							"",
+							"//validate response code",
+							"pm.test(\"validate response code is 201\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"//validate response is an object (can be empty)",
+							"pm.test(\"Response is an object\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"});",
+							"",
+							"//validate each record has id, title, price, description, category, image",
+							"pm.test(\"Each record has the correct fields\", function(){",
+							"    pm.expect(json).to.have.property('id');",
+							"    pm.expect(json).to.have.property('userId');",
+							"    pm.expect(json).to.have.property('date');",
+							"    pm.expect(json).to.have.property('products');",
+							"",
+							"    // Validate each product if present",
+							"    json.products.forEach(prod => {",
+							"        counter++;",
+							"        pm.expect(prod).to.have.property('productId');",
+							"        pm.expect(prod).to.have.property('quantity');",
+							"        pm.expect(prod.productId).to.be.a('number');",
+							"        pm.expect(prod.quantity).to.be.a('number');",
+							"    });",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"collection_level_new_cart_id\", json.id)"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get the current date to be used for the date when adding to a cart",
+							"pm.variables.set(\"currentDate\", new Date().toISOString());",
+							"//generate a random product Id for the product Id",
+							"pm.variables.set(\"randomProductId\", Math.ceil(Math.random() * 10));",
+							"//generate a random number between 1-10 for the quantity",
+							"pm.variables.set(\"randomQuantity\", Math.ceil(Math.random() * 10));",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": {{collection_level_new_cart_id}},\n    \"userId\": {{collection_level_random_id}},\n    \"date\": \"{{currentDate}}\",\n    \"products\": [\n        {\n            \"productId\": {{collection_level_product_id}},\n            \"quantity\": {{randomQuantity}}\n        }\n    ],\n    \"__v\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/carts/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"carts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step 5: Get Cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json();",
+							"let counter = 0;",
+							"",
+							"//validate response code",
+							"pm.test(\"validate response code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//validate response is an object (can be empty)",
+							"pm.test(\"Response is an object\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"});",
+							"",
+							"//validate each record has id, title, price, description, category, image",
+							"pm.test(\"Each record has the correct fields\", function(){",
+							"    pm.expect(json).to.have.property('id');",
+							"    pm.expect(json).to.have.property('userId');",
+							"    pm.expect(json).to.have.property('date');",
+							"    pm.expect(json).to.have.property('products');",
+							"    pm.expect(json).to.have.property('__v');",
+							"",
+							"    // Validate each product if present",
+							"    json.products.forEach(prod => {",
+							"        counter++;",
+							"        pm.expect(prod).to.have.property('productId');",
+							"        pm.expect(prod).to.have.property('quantity');",
+							"        pm.expect(prod.productId).to.be.a('number');",
+							"        pm.expect(prod.quantity).to.be.a('number');",
+							"    });",
+							"});",
+							"",
+							"console.log(\"Total items: \"+ counter);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let randomNumber = Math.ceil(Math.random() * pm.collectionVariables.get(\"collection_level_number_of_entries\"));",
+							"pm.variables.set(\"id\", randomNumber);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/carts/:id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"carts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step 6: Update Cart Quantity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json();",
+							"let counter = 0;",
+							"",
+							"//validate response code",
+							"pm.test(\"validate response code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//validate response is an object (can be empty)",
+							"pm.test(\"Response is an object\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"});",
+							"",
+							"//validate each record has id, title, price, description, category, image",
+							"pm.test(\"Each record has the correct fields\", function(){",
+							"    pm.expect(json).to.have.property('id');",
+							"    pm.expect(json).to.have.property('userId');",
+							"    pm.expect(json).to.have.property('date');",
+							"    pm.expect(json).to.have.property('products');",
+							"",
+							"    // Validate each product if present",
+							"    json.products.forEach(prod => {",
+							"        counter++;",
+							"        pm.expect(prod).to.have.property('productId');",
+							"        pm.expect(prod).to.have.property('quantity');",
+							"        pm.expect(prod.productId).to.be.a('number');",
+							"        pm.expect(prod.quantity).to.be.a('number');",
+							"    });",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"collection_level_new_cart_id\", json.id)"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// //get the current date to be used for the date when adding to a cart",
+							"pm.variables.set(\"currentDate\", new Date().toISOString());",
+							"//generate a random product Id for the product Id",
+							"pm.variables.set(\"randomProductId\", Math.ceil(Math.random() * 10));",
+							"//generate a random number between 1-10 for the quantity",
+							"pm.variables.set(\"randomQuantity\", Math.ceil(Math.random() * 10));",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": {{collection_level_new_cart_id}},\n    \"userId\": 1,\n    \"date\": \"{{currentDate}}\",\n    \"products\": [\n        {\n            \"productId\": {{randomProductId}},\n            \"quantity\": {{randomQuantity}}\n        }\n    ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/carts/:id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"carts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{collection_level_new_cart_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step 7: Delete Cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//validate response code",
+							"pm.test(\"validate response code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//validate response is null",
+							"pm.test(\"Response for delete should be null\", function(){",
+							"   pm.expect(pm.response.json()).to.be.null;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/carts/:id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"carts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{collection_level_new_cart_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "collection_level_product_id",
+			"value": ""
+		},
+		{
+			"key": "collection_level_random_id",
+			"value": ""
+		},
+		{
+			"key": "collection_level_random_id_price",
+			"value": ""
+		},
+		{
+			"key": "collection_level_auth_token",
+			"value": ""
+		},
+		{
+			"key": "collection_level_new_cart_id",
+			"value": ""
+		}
+	]
+}
