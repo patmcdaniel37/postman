@@ -26,6 +26,9 @@ jobs:
       - name: Install Newman
         run: npm install newman
 
+      - name: Debug ENV
+        run: cat postman/environments/${{ env.ENV_FILE }}
+
       - name: Run Postman Collection
         run: |
           npx newman run "postman/collections/01 - RESTful API Fundamentals.postman_collection.json" \
