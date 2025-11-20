@@ -1,0 +1,98 @@
+name: Newman API Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install Newman and Reporter
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+      
+      - name: Create Reports Directory
+        run: mkdir -p postman/reports
+      
+      - name: Run Collection 1 - RESTful API Fundamentals
+        run: |
+          newman run postman/collections/01-RESTful_API_Fundamentals.postman_collection.json \
+            -e postman/environments/API_Testing.postman_environment.json \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export postman/reports/01-restful-report.html \
+            --reporter-htmlextra-darkTheme
+        continue-on-error: false
+      
+      - name: Run Collection 2 - Authentication
+        run: |
+          newman run postman/collections/02-Authentication-Authorization.postman_collection.json \
+            -e postman/environments/API_Testing.postman_environment.json \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export postman/reports/02-auth-report.html \
+            --reporter-htmlextra-darkTheme
+        continue-on-error: false
+      
+      - name: Run Collection 3 - E-commerce API
+        run: |
+          newman run postman/collections/03-E-commerce_API_Testing.postman_collection.json \
+            -e postman/environments/API_Testing.postman_environment.json \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export postman/reports/03-ecommerce-report.html \
+            --reporter-htmlextra-darkTheme
+        continue-on-error: false
+      
+      - name: Run Collection 4 - Data Driven Testing
+        run: |
+          newman run postman/collections/04-Data_Driven_Testing.postman_collection.json \
+            -e postman/environments/API_Testing.postman_environment.json \
+            --iteration-data postman/data/products.csv \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export postman/reports/04-ddt-report.html \
+            --reporter-htmlextra-darkTheme
+        continue-on-error: false
+      
+      - name: Run Collection 5 - E2E Shopping Workflow
+        run: |
+          newman run postman/collections/05-E2E_Shopping_Workflow.postman_collection.json \
+            -e postman/environments/API_Testing.postman_environment.json \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export postman/reports/05-e2e-report.html \
+            --reporter-htmlextra-darkTheme
+        continue-on-error: false
+      
+      - name: Run Collection 6 - Advanced Techniques
+        run: |
+          newman run postman/collections/06-Advanced_Techniques.postman_collection.json \
+            -e postman/environments/API_Testing.postman_environment.json \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export postman/reports/06-advanced-report.html \
+            --reporter-htmlextra-darkTheme
+        continue-on-error: false
+      
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: newman-test-reports
+          path: postman/reports/*.html
+          retention-days: 30
+      
+      - name: Test Summary
+        if: always()
+        run: |
+          echo "✅ All API tests completed!"
+          echo "📊 Reports generated in postman/reports/"
