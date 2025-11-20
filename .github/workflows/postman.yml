@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENV_FILE: postman/postman/environments/Dev.postman_environment.json # change as needed (Stage/Prod)
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -33,12 +34,12 @@ jobs:
             --reporter-json-export "postman/collections/newman-report-01.json"
             
           # npx newman run "postman/collections/02 - Authentication/Authorization.postman_collection.json" \
-          #   --environment "postman/environments/API Testing.postman_environment.json" \
+          #   --environment "postman/environments/${{ env.ENV_FILE }}" \
           #   --reporters cli,json \
           #   --reporter-json-export "postman/collections/newman-report-02.json"
 
           # npx newman run "postman/collections/03 - Public APIs Testing.postman_collection" \
-          #   --environment "postman/environments/API Testing.postman_environment.json" \
+          #   --environment "postman/environments/${{ env.ENV_FILE }}" \
           #   --reporters cli,json \
           #   --reporter-json-export "postman/collections/newman-report-03.json"
 
