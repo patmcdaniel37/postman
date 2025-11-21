@@ -32,7 +32,7 @@ jobs:
       
       - name: Run Collection 1 - RESTful API Fundamentals
         run: |
-          newman run postman/collections/01 - RESTful API Fundamentals.postman_collection.json \
+          newman run "postman/collections/01 - RESTful API Fundamentals.postman_collection.json" \
             -e postman/environments/${{ env.ENV_FILE }} \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/01-restful-report.html \
@@ -41,7 +41,7 @@ jobs:
       
       - name: Run Collection 2 - Authentication
         run: |
-          newman run postman/collections/02 - Authentication-Authorization.postman_collection.json \
+          newman run "postman/collections/02 - Authentication-Authorization.postman_collection.json" \
             -e postman/environments/${{ env.ENV_FILE }} \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/02-auth-report.html \
@@ -50,7 +50,7 @@ jobs:
       
       - name: Run Collection 3 - E-commerce API
         run: |
-          newman run postman/collections/03 - E-commerce API Testing.postman_collection.json \
+          newman run "postman/collections/03 - E-commerce API Testing.postman_collection.json" \
             -e postman/environments/${{ env.ENV_FILE }} \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/03-ecommerce-report.html \
@@ -59,7 +59,7 @@ jobs:
       
       - name: Run Collection 4 - Data Driven Testing
         run: |
-          newman run postman/collections/04 - Data Driven Testing.postman_collection.json \
+          newman run "postman/collections/04 - Data Driven Testing.postman_collection.json" \
             -e postman/environments/${{ env.ENV_FILE }} \
             --iteration-data postman/data/products.csv \
             --reporters cli,htmlextra \
@@ -69,7 +69,7 @@ jobs:
       
       - name: Run Collection 5 - E2E Shopping Workflow
         run: |
-          newman run postman/collections/05 - E2E Shopping Workflow.postman_collection.json \
+          newman run "postman/collections/05 - E2E Shopping Workflow.postman_collection.json" \
             -e postman/environments/${{ env.ENV_FILE }} \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/05-e2e-report.html \
@@ -78,7 +78,7 @@ jobs:
       
       - name: Run Collection 6 - Advanced Techniques
         run: |
-          newman run postman/collections/06 - Advanced Techniques.postman_collection.json \
+          newman run "postman/collections/06 - Advanced Techniques.postman_collection.json" \
             -e postman/environments/${{ env.ENV_FILE }} \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/06-advanced-report.html \
