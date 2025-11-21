@@ -10,6 +10,8 @@ on:
 jobs:
   api-tests:
     runs-on: ubuntu-latest
+    env:
+      ENV_FILE: Dev.postman_environment.json # change as needed (Stage/Prod)
     
     steps:
       - name: Checkout Repository
@@ -30,8 +32,8 @@ jobs:
       
       - name: Run Collection 1 - RESTful API Fundamentals
         run: |
-          newman run postman/collections/01-RESTful_API_Fundamentals.postman_collection.json \
-            -e postman/environments/API_Testing.postman_environment.json \
+          newman run postman/collections/01 - RESTful API Fundamentals.postman_collection.json \
+            -e postman/environments/${{ env.ENV_FILE }} \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/01-restful-report.html \
             --reporter-htmlextra-darkTheme
@@ -39,8 +41,8 @@ jobs:
       
       - name: Run Collection 2 - Authentication
         run: |
-          newman run postman/collections/02-Authentication-Authorization.postman_collection.json \
-            -e postman/environments/API_Testing.postman_environment.json \
+          newman run postman/collections/02 - Authentication-Authorization.postman_collection.json \
+            -e postman/environments/${{ env.ENV_FILE }} \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/02-auth-report.html \
             --reporter-htmlextra-darkTheme
@@ -48,8 +50,8 @@ jobs:
       
       - name: Run Collection 3 - E-commerce API
         run: |
-          newman run postman/collections/03-E-commerce_API_Testing.postman_collection.json \
-            -e postman/environments/API_Testing.postman_environment.json \
+          newman run postman/collections/03 - E-commerce API Testing.postman_collection.json \
+            -e postman/environments/${{ env.ENV_FILE }} \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/03-ecommerce-report.html \
             --reporter-htmlextra-darkTheme
@@ -57,8 +59,8 @@ jobs:
       
       - name: Run Collection 4 - Data Driven Testing
         run: |
-          newman run postman/collections/04-Data_Driven_Testing.postman_collection.json \
-            -e postman/environments/API_Testing.postman_environment.json \
+          newman run postman/collections/04 - Data Driven Testing.postman_collection.json \
+            -e postman/environments/${{ env.ENV_FILE }} \
             --iteration-data postman/data/products.csv \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/04-ddt-report.html \
@@ -67,8 +69,8 @@ jobs:
       
       - name: Run Collection 5 - E2E Shopping Workflow
         run: |
-          newman run postman/collections/05-E2E_Shopping_Workflow.postman_collection.json \
-            -e postman/environments/API_Testing.postman_environment.json \
+          newman run postman/collections/05 - E2E Shopping Workflow.postman_collection.json \
+            -e postman/environments/${{ env.ENV_FILE }} \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/05-e2e-report.html \
             --reporter-htmlextra-darkTheme
@@ -76,8 +78,8 @@ jobs:
       
       - name: Run Collection 6 - Advanced Techniques
         run: |
-          newman run postman/collections/06-Advanced_Techniques.postman_collection.json \
-            -e postman/environments/API_Testing.postman_environment.json \
+          newman run postman/collections/06 - Advanced Techniques.postman_collection.json \
+            -e postman/environments/${{ env.ENV_FILE }} \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export postman/reports/06-advanced-report.html \
             --reporter-htmlextra-darkTheme
