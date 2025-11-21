@@ -12,7 +12,9 @@ jobs:
   automated-api-tests:
     runs-on: ubuntu-latest
     env:
-      ENV_FILE: Dev.postman_environment.json # change as needed (Stage/Prod)
+      DEV_ENV_FILE: Dev.postman_environment.json # change as needed (Stage/Prod)
+      STAGE_ENV_FILE: Stage.postman_environment.json # change as needed (Stage/Prod)
+      PROD_ENV_FILE: Prod.postman_environment.json # change as needed (Stage/Prod)
       
     steps:
       - name: Checkout code
@@ -32,39 +34,39 @@ jobs:
       - name: Run Postman Collection
         run: |
           npx newman run "postman/collections/01 - RESTful API Fundamentals.postman_collection.json" \
-            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --environment "postman/environments/${{ env.DEV_ENV_FILE }}" \
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report-01.json"
             
           npx newman run "postman/collections/02 - Authentication-Authorization.postman_collection.json" \
-            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --environment "postman/environments/${{ env.DEV_ENV_FILE }}" \
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report-02.json"
 
           npx newman run "postman/collections/03 - E-commerce API Testing.postman_collection.json" \
-            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --environment "postman/environments/${{ env.STAGE_ENV_FILE }}" \
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report-03.json"
 
           npx newman run "postman/collections/04 - Data Driven Testing.postman_collection.json" \
-            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --environment "postman/environments/${{ env.STAGE_ENV_FILE }}" \
             --iteration-data postman/collections/testData.csv \
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report-04-csv.json"
 
           npx newman run "postman/collections/04 - Data Driven Testing.postman_collection.json" \
-            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --environment "postman/environments/${{ env.STAGE_ENV_FILE }}" \
             --iteration-data postman/collections/testData.json \
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report-04-json.json"
 
           npx newman run "postman/collections/05 - E2E Shopping Workflow.postman_collection.json" \
-            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --environment "postman/environments/${{ env.PROD_ENV_FILE }}" \
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report-05.json"
 
           npx newman run "postman/collections/06 - Advanced Techniques.postman_collection.json" \
-            --environment "postman/environments/${{ env.ENV_FILE }}" \
+            --environment "postman/environments/${{ env.PROD_ENV_FILE }}" \
             --reporters cli,json \
             --reporter-json-export "postman/collections/newman-report-06.json"
 
