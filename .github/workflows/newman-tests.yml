@@ -18,6 +18,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Cache npm
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -108,3 +114,7 @@ jobs:
         run: |
           echo "✅ All API tests completed!"
           echo "📊 Reports generated in postman/reports/"
+      
+      - name: Notify on Failure
+        if: failure()
+        run: echo "::error::Tests failed! Check logs."
