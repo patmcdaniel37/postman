@@ -24,12 +24,12 @@ This portfolio demonstrates comprehensive API testing skills using Postman and N
 
 ## 🎯 Collections
 
-1. **RESTful API Fundamentals** - CRUD operations with JSONPlaceholder
-2. **Authentication/Authorization** - Token-based auth with Restful-Booker
-3. **E-commerce API Testing** - Complex workflows with FakeStore API
-4. **Data Driven Testing** - CSV/JSON parameterization
-5. **E2E Shopping Workflow** - Complete user journey
-6. **Advanced Techniques** - Schema validation, performance testing
+1. **RESTful API Fundamentals** - CRUD operations with JSONPlaceholder running in dev env
+2. **Authentication/Authorization** - Token-based auth with Restful-Booker running in dev env
+3. **E-commerce API Testing** - Complex workflows with FakeStore API running in stage env
+4. **Data Driven Testing** - CSV/JSON parameterization running in stage env
+5. **E2E Shopping Workflow** - Complete user journey running in prod env
+6. **Advanced Techniques** - Schema validation, performance testing running in prod env
 
 ## 🚀 Getting Started
 
