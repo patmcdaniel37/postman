@@ -56,6 +56,45 @@ bash newman/run-all-tests.sh
 # Run specific collection
 newman run postman/collections/01-*.json \
   -e postman/environments/API_Testing.postman_environment.json
+
+# Run specific collection
+newman run postman/collections/01-*.json \
+  -e postman/environments/API_Testing.postman_environment.json
+```
+
+### Data Driven Test Files
+> ###### CSV Dataset
+```
+title, price, description, image, category
+USB-C Flash Drive 99TB, 99.99, USB-C Flash Drive 99TB, https://fakestoreapi.com/img/123ABC_99TB.png, electronics
+Bluetooth Keyboard/Mouse, 79.99, Bluetook Keyboard and Mouse, https://fakestoreapi.com/img/456ABC_BTKM.png, electronics
+Screen Cleaner Wipes, 9.99, Anti-Static Screen Cleaner Wipes, https://fakestoreapi.com/img/789ABC_SCW.png, electronics
+```
+> ###### JSON Dataset
+```
+[
+    {
+        "title" : "USB-C Flash Drive 99TB",
+        "price" : "99.99",
+        "description" : "USB-C Flash Drive 99TB",
+        "image" : "https://fakestoreapi.com/img/123ABC_99TB.png",
+        "category" : "electronics"
+    },
+    {
+        "title" : "Bluetooth Keyboard/Mouse",
+        "price" : "79.99",
+        "description" : "Bluetook Keyboard and Mouse",
+        "image" : "https://fakestoreapi.com/img/456ABC_BTKM.png",
+        "category" : "electronics"
+    },
+    {
+        "title" : "Screen Cleaner Wipes",
+        "price" : "9.99",
+        "description" : "Anti-Static Screen Cleaner Wipes",
+        "image" : "https://fakestoreapi.com/img/789ABC_SCW.png",
+        "category" : "electronics"
+    }
+]
 ```
 
 ## 📊 Test Reports
