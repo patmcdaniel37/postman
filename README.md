@@ -55,11 +55,9 @@ newman run postman/collections/01-*.json \
 
 ## 📊 Test Reports
 
-Sample test report showing comprehensive validation:
+Sample test report:
 
-![Test Report](postman/docs/images/test-report-screenshot.png)
-
-[View Sample Report](postman/reports/01 - RESTful API Fundamentals.postman_collection.html)
+<img src="postman/docs/images/test-report-screenshot.png" width="400px">
 
 ## 🛠️ Technology Stack
 
