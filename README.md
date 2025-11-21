@@ -8,9 +8,9 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Quick Stats
-- 6 Collections | 150+ Tests | 3 APIs
-- 100% Pass Rate | Average Response Time: <200ms
-- CI/CD Integrated | Automated Reporting
+6 Collections | 150+ Tests | 3 APIs<br>
+100% Pass Rate | Average Response Time: <200ms<br>
+CI/CD Integrated | Automated Reporting
 
 ### API testing project showcasing <br>CRUD, Authentication, E2E Workflows & Advanced Techniques
 
