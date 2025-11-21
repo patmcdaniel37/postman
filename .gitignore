@@ -2,4 +2,5 @@ node_modules/
 postman/reports/*.html
 !postman/reports/sample-report.html
 .DS_Store
+newman/
 *.log
