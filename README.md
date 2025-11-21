@@ -12,7 +12,7 @@
 - 100% Pass Rate | Average Response Time: <200ms
 - CI/CD Integrated | Automated Reporting
 
-### Professional API testing showcasing CRUD, Authentication, E2E Workflows & Advanced Techniques
+### API testing project showcasing <br>CRUD, Authentication, E2E Workflows & Advanced Techniques
 
 </div>
 
@@ -20,7 +20,7 @@
 
 ## 📋 Overview
 
-This portfolio demonstrates comprehensive API testing skills using Postman and Newman...
+This portfolio demonstrates comprehensive API testing skills using Postman and Newman.
 
 ## 🎯 Collections
 
