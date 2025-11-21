@@ -57,7 +57,7 @@ newman run postman/collections/01-*.json \
 
 Sample test report showing comprehensive validation:
 
-![Test Report](docs/images/test-report-screenshot.png)
+![Test Report](postman/docs/images/test-report-screenshot.png)
 
 [View Sample Report](postman/reports/01 - RESTful API Fundamentals.postman_collection.html)
 
